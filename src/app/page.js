@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 const navigation = [
   { name: 'Home', href: '/home' },
-  { name: 'Assessment', href: '/assessment' },
+  { name: 'Assessment', href: '/home/assessment' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ]
@@ -54,7 +54,7 @@ export default function LandingPage() {
             <Link href="/login" className="-my-4 p-4 rounded-full text-lg font-semibold text-white hover:bg-sky-700">
               Log in
             </Link>
-            <Link href="/login" className="bg-white isolate rounded-full -my-4 -mr-7 px-5 py-4 text-lg font-semibold text-gray-950 hover:bg-sky-100">
+            <Link href="/register" className="bg-white isolate rounded-full -my-4 -mr-7 px-5 py-4 text-lg font-semibold text-gray-950 hover:bg-sky-100">
               Sign up
             </Link>
           </div>
