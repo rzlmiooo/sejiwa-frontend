@@ -217,7 +217,7 @@ export default function LandingPage() {
           Gabung Sekarang<ArrowUpRightIcon className="ml-2 size-5"/>
         </Link>
         <div className="-left-50 absolute m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-700 overflow-x-hidden"></div>
-        <div className="absolute -right-50 m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-500"></div>
+        <div className="absolute -right-50 m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-500 overflow-x-hidden"></div>
       </div>
 
       {/* footer */}
