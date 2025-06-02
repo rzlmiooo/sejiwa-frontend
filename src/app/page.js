@@ -209,15 +209,15 @@ export default function LandingPage() {
       </div>
 
       {/* bottom-cta */}
-      <div className="mx-100 my-50 flex flex-col justify-center items-center">
-        <div className="mt-20 mb-20 sm:mb-20 flex justify-center text-center text-4xl text-gray-950 sm:text-5xl">
+      <div className="relative my-30 flex flex-col justify-center items-center overflow-x-hidden">
+        <div className="my-50 mb-10 mx-100 flex justify-center text-center text-4xl text-gray-950 sm:text-5xl">
           Sejiwa bersedia mengantarmu menuju dirimu yang lebih baik. 
         </div>
-        <Link href="/home/assessment" className="mt-0 mx-20 mb-10 flex items-center justify-center z-50 rounded-4xl bg-sky-600 px-5 py-2.5 text-lg font-semibold text-white shadow-xs hover:bg-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+        <Link href="/home/assessment" className="mt-0 mx-20 mb-50 flex items-center justify-center rounded-4xl bg-sky-600 px-5 py-2.5 text-lg font-semibold text-white shadow-xs hover:bg-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
           Gabung Sekarang<ArrowUpRightIcon className="ml-2 size-5"/>
         </Link>
-        <div className="-left-50 absolute m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-700 overflow-x-hidden"></div>
-        <div className="absolute -right-50 m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-500 overflow-x-hidden"></div>
+        <div className="absolute -left-50 m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-700"></div>
+        <div className="absolute -right-50 m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-500"></div>
       </div>
 
       {/* footer */}
