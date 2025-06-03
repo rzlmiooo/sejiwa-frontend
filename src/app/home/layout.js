@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Path from '../components/pathname'
 import { Bars3Icon } from '@heroicons/react/24/solid'
+import UserGreeting from '../components/greetings'
 
 const navigation = [
     {src: '/dashboard.png', name: 'Beranda', href: '/home' },
@@ -9,8 +10,6 @@ const navigation = [
     {src: '/chat.png', name: 'Chat Konselor', href: '/home/chat' },
     {src: '/settings.png', name: 'Pengaturan', href: '/home/settings' }
 ]
-
-let username = 'Rizal'
 
 export default function Homepage({ children }){
     return (
@@ -25,7 +24,7 @@ export default function Homepage({ children }){
                     </Link>
                 </div>
                 <div className="flex justify-center items-center gap-3">
-                    <h1 className="hidden sm:block font-bold">Hi, { username }</h1>
+                    <h1 className="hidden sm:block font-bold">Hi, <UserGreeting/></h1>
                     <img src="/favicon.ico" alt="" className="p-1 bg-sky-50 rounded-full w-10 h-auto"></img>
                 </div>
             </div>
