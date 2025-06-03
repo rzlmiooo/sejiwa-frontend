@@ -9,18 +9,18 @@ export const AuthService = {
                     headers: { "Content-Type": "application/json" }
                 }
             );
-            console.log("Login Response:", response.data);
-            
-            if (response.data.access_token) {
-                localStorage.setItem("access_token", response.data.access_token);
-                localStorage.setItem("refresh_token", response.data.refresh_token || "");
-                console.log(" Stored Access Token:", localStorage.getItem("access_token"));
-            } else if (response.data.token) {
-                localStorage.setItem("access_token", response.data.token);
-                console.log(" Stored Token (Backend Uses 'token'):", response.data.token);
-            } else {
-                console.error(" No token found in response");
-            }
+                // console.log("Login Response:", response.data);
+                
+                // if (response.data.access_token) {
+                //     localStorage.setItem("access_token", response.data.access_token);
+                //     localStorage.setItem("refresh_token", response.data.refresh_token || "");
+                //     console.log(" Stored Access Token:", localStorage.getItem("access_token"));
+                // } else if (response.data.token) {
+                //     localStorage.setItem("access_token", response.data.token);
+                //     console.log(" Stored Token (Backend Uses 'token'):", response.data.token);
+                // } else {
+                //     console.error(" No token found in response");
+                // }
     
             return response.data;
         } catch (error) {
