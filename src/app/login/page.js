@@ -34,19 +34,40 @@ export default function Form() {
 
   return (
     <div className="flex justify-center items-center h-screen overflow-hidden">
+
+      {/* scroll */}
       <div className="hidden sm:flex object-cover justify-center items-center w-full gap-5 bg-sky-50">
-        <div className="flex flex-col gap-5">
+        <div className="mt-84 flex flex-col gap-5 animate-scroll-up">
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
           <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
           <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
           <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
         </div>
-        <div className="hidden lg:flex flex-col gap-5">
+        <div className="hidden lg:flex flex-col gap-5 animate-scroll-up">
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
+          <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
           <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
           <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
           <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
           <div className="p-5 py-5 w-50 md:w-60 h-80 md:h-80 rounded-2xl bg-gray-200" />
         </div>
       </div>
+
+      {/* form */}
       <div className="p-5 bg-sky-500 h-full w-full">
 
         {error && <p style={{ color: "red" }}>{error}</p>}

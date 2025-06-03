@@ -12,6 +12,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@layer utilities {
+  @keyframes scroll-up {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+  .animate-scroll-up {
+    animation: scroll-up 60s linear infinite;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

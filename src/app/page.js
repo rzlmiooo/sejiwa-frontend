@@ -209,22 +209,22 @@ export default function LandingPage() {
       </div>
 
       {/* bottom-cta */}
-      <div className="relative my-30 flex flex-col justify-center items-center overflow-x-hidden">
-        <div className="my-50 mb-10 mx-100 flex justify-center text-center text-4xl text-gray-950 sm:text-5xl">
+      <div className="relative my-10 sm:my-30 flex flex-col justify-center items-center overflow-x-hidden">
+        <div className="my-50 mb-10 mx-100 flex justify-center text-center text-3xl text-gray-950 sm:text-5xl">
           Sejiwa bersedia mengantarmu menuju dirimu yang lebih baik. 
         </div>
         <Link href="/home/assessment" className="mt-0 mx-20 mb-50 flex items-center justify-center rounded-4xl bg-sky-600 px-5 py-2.5 text-lg font-semibold text-white shadow-xs hover:bg-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
           Gabung Sekarang<ArrowUpRightIcon className="ml-2 size-5"/>
         </Link>
-        <div className="absolute -left-50 m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-700"></div>
-        <div className="absolute -right-50 m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-500"></div>
+        <div className="absolute -left-60 sm:-left-50 m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-700"></div>
+        <div className="absolute -right-60 sm:-right-50 m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-500"></div>
       </div>
 
       {/* footer */}
       <div className="bg-gray-800 text-white py-10 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-row items-start justify-center gap-10">
-            <div className="flex flex-col items-start justify-center gap-7">
+          <div className="flex flex-col-reverse sm:flex-row items-center sm:items-start justify-center gap-10">
+            <div className="flex flex-col items-center sm:items-start justify-center gap-4 sm:gap-7">
               <img src="/icon.png" alt="Logo" className="h-10 w-auto mb-4" />
               <div>
                 <p className="text-center text-sm">
@@ -236,18 +236,18 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
-              <div className="flex flex-col items-center justify-start ml-10">
-                <h2 className="text-lg font-semibold mb-3">Sejiwa App</h2>
-                <div className='pl-4 flex flex-col items-start justify-center'>
+              <div className="flex flex-row sm:flex-col items-center justify-start sm:ml-10">
+                <h2 className="text-lg font-semibold pr-4 sm:pr-0 mb-3">Sejiwa App</h2>
+                <div className='pl-5 sm:pl-4 border-l-2 sm:border-l-0 border-sky-50 flex flex-col items-start justify-center'>
                   <Link href="/home" className="text-white hover:text-gray-400">Home</Link>
                   <Link href="/assessment" className="text-white hover:text-gray-400">Assessment</Link>
                   <Link href="/about" className="text-white hover:text-gray-400">About</Link>
                   <Link href="/contact" className="text-white hover:text-gray-400">Contact</Link>
                 </div>
               </div>
-              <div className="flex flex-col items-start justify-center ml-10">
-              <h2 className="text-lg font-semibold mb-3">Follow Us</h2>
-              <div className="pl-4 flex flex-col space-x-4">
+              <div className="flex flex-row sm:flex-col items-center justify-start sm:ml-5">
+              <h2 className="text-lg font-semibold pr-4 sm:pr-0 mb-3">Follow Us</h2>
+              <div className="pl-5 sm:pl-10 border-l-2 sm:border-l-0 border-sky-50 flex flex-col items-start justify-center">
                 <Link href="#" className="flex gap-2 text-white hover:text-gray-400">
                 <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
