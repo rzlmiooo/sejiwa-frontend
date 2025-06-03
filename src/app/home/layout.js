@@ -31,7 +31,7 @@ export default function Homepage({ children }){
             </div>
             <div className="h-screen flex flex-row">
                 {/* sidebar */}
-                <div className="p-1 w-22 sm:w-72 bg-gray-900 border-r-1 border-white">
+                <div className="p-1 w-18 sm:w-72 bg-gray-900 border-r-1 border-white">
                     {navigation.map((item) => (
                         <Link key={item.name} href={item.href} className="mx-5 my-8 flex flex-row items-center gap-5 text-xl font-bold hover:scale-102">
                         <img src={item.src} className='w-5 h-5'></img><h1 className="hidden md:block">{item.name}</h1>
