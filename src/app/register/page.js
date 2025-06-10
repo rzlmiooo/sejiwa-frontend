@@ -36,7 +36,8 @@ export default function RegistrationForm() {
         role: state.role
       };
 
-      axios.post("https://sejiwa.onrender.com/api/signup", payload)
+      axios
+        .post("https://sejiwa.onrender.com/api/signup", payload)
         .then((response) => {
           if (response.status === 200) {
             setState((prevState) => ({
