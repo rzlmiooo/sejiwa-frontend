@@ -1,5 +1,3 @@
-"use client";
-
 export default function Rejected() {
     return (
         <div class="bg-gray-100 h-screen">
