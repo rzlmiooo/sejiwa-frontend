@@ -3,6 +3,8 @@
 import axios from 'axios'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { ArrowRightIcon } from '@heroicons/react/24/solid'
 
 export default function Params() {
   const searchParams = useSearchParams()
@@ -32,7 +34,12 @@ export default function Params() {
     fetchData();
   }, [searchParams])
 
-  if (loading) return <p className="p-4">Loading...</p>
+  if (loading) return (
+    <div className="m-auto flex flex-col justify-center items-center gap-4">
+      <p className="text-gray-700">Kamu belum mengisi Assessment</p>
+      <Link href="/home/assessment" className="px-5 py-2 rounded-4xl bg-sky-600 hover:bg-sky-500 text-sky-50 flex items-center">Pergi ke Assessment <ArrowRightIcon className="size-4"/></Link>
+    </div>
+  )
   return (
     <div className="flex h-screen">
           {/* Main content */}
@@ -52,6 +59,6 @@ export default function Params() {
               </div>
             </div>
           </main>
-        </div>
+    </div>
   )
 }
