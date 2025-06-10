@@ -4,8 +4,8 @@ import axios from 'axios';
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from 'next/navigation';
-import Leftbar from '../../../components/leftbar';
-import Topbar from '../../../components/topbar';
+// import Leftbar from '../app/components/leftbar';
+// import Topbar from '../app/components/topbar';
 
 export default function CreateBooking() {
     const router = useRouter();
@@ -82,7 +82,7 @@ export default function CreateBooking() {
     return (
         <div className="flex h-screen">
             {/* Sidebar toggle button for small screens */}
-            <button
+            {/* <button
                 data-drawer-target="default-sidebar"
                 data-drawer-toggle="default-sidebar"
                 aria-controls="default-sidebar"
@@ -97,14 +97,14 @@ export default function CreateBooking() {
                         d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
                     />
                 </svg>
-            </button>
+            </button> */}
 
             {/* Sidebar */}
-            <Leftbar />
+            {/* <Leftbar /> */}
 
             {/* Main content */}
             <main className="flex-1 p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
-                <Topbar />
+                {/* <Topbar /> */}
                 {/* Add your content here */}
                 <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
                     <div class="bg-white rounded-xl shadow-xs p-4 sm:p-7 dark:bg-neutral-900">
