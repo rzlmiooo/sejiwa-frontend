@@ -1,12 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useSearchParams } from 'next/navigation';
-import axios from 'axios';
-import Leftbar from '../../../components/leftbarKonselor';
-import Topbar from '../../../components/topbar';
-
 export default function Success() {
     return (
         <div class="bg-gray-100 h-screen">

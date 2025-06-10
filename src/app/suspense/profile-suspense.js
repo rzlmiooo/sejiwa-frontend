@@ -1,13 +1,11 @@
 'use client';
 
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 // import Topbar from '../../components/topbar';
 // import Chart from '../../components/chart';
 // import Leftbar from '../../components/leftbarKonselor';
 
-export default function ChatKonselor() {
+export default function Profile() {
     const router = useRouter();
     const searchParams = useSearchParams();
    
