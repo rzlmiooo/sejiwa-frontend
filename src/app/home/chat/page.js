@@ -4,8 +4,8 @@ export default function Chat() {
     return (
         <div className="flex-1 flex-col justify-start items-start p-5 m-4 w-fit sm:max-w-4xl overflow-y-scroll lg:overflow-y-hidden">
             {/* headline */}
-            <div>
-                Temukan Konselor untukmu. Klik Cari Konselor
+            <div className="px-4 font-bold text-2xl text-gray-900">
+                Temukan Konselor untukmu.<br/><span className="text-lg font-medium">Klik Cari Konselor</span>
             </div>
             {/* grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 w-full min-h-max">

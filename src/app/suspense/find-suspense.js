@@ -3,11 +3,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
-// import Leftbar from '../../components/leftbar';
-// import Topbar from '../../components/topbar';
 import { useRouter } from "next/navigation";
 import { getStudentId } from "@/app/utils/auth/auth";
-
 
 export default function FindConselor() {
   const router = useRouter();
@@ -73,32 +70,10 @@ export default function FindConselor() {
 
   if (loading) return <p className="p-4">Loading...</p>;
   return (
-    <div className="flex h-screen">
-      {/* Sidebar toggle button for small screens */}
-      {/* <button
-        data-drawer-target="default-sidebar"
-        data-drawer-toggle="default-sidebar"
-        aria-controls="default-sidebar"
-        type="button"
-        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-      >
-        <span className="sr-only">Open sidebar</span>
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path
-            clipRule="evenodd"
-            fillRule="evenodd"
-            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-          />
-        </svg>
-      </button> */}
-
-      {/* Sidebar */}
-      {/* <Leftbar /> */}
-      {/* Main content */}
-      <main className="flex-1 p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
-        {/* <Topbar /> */}
-        <h1 className="text-2xl font-bold">Available Konselor</h1>
-        {/* Add your content here */}
+    <div className="flex h-auto bg-gray-100 dark:bg-gray-900 text-black dark:text-white overflow-y-scroll">
+      <main className="flex-1 p-6">
+        <h1 className="px-6 pt-2 text-2xl font-bold">Daftar Konselor</h1>
+        <h1 className="px-6 text-lg font-medium">Pilih konselor yang tersedia</h1>
         <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 py-12 lg:py-24 mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             {counselors.map((counselor) => (
@@ -106,12 +81,11 @@ export default function FindConselor() {
                 <div className="relative">
                   <div className="aspect-4/4 overflow-hidden rounded-2xl">
                     <img
-                      className="size-full object-cover rounded-2xl"
-                      src="/profile/profile-1.jpg"
+                      className="p-16 size-full object-cover rounded-2xl"
+                      src="/profile.png"
                       alt="Profile"
                     />
                   </div>
-
                   <div className="pt-4">
                     <h3 className="font-medium md:text-lg text-black dark:text-white">
                       {counselor.username}
@@ -120,10 +94,8 @@ export default function FindConselor() {
                       {counselor.email}
                     </p>
                   </div>
-
                   <a href="#" className="after:absolute after:inset-0 after:z-1"></a>
                 </div>
-
                 <div className="mb-2 mt-4 text-sm">
                   {counselor.schedule.length > 0 ? (
                     <div className="flex flex-col">
@@ -133,25 +105,23 @@ export default function FindConselor() {
                             className="py-3 border-t border-gray-200 dark:border-neutral-700 cursor-pointer hover:underline"
                           >
                             <div className="grid grid-cols-2 gap-2">
-                              <span className="font-medium text-black dark:text-white">Schedule Time:</span>
+                              <span className="font-medium text-black dark:text-white">Jadwal Konselor:</span>
                               <span className="text-end text-black dark:text-white">{item.date}</span>
                             </div>
                           </div>
-
                           <div className="py-3 border-t border-gray-200 dark:border-neutral-700">
                             <div className="grid grid-cols-2 gap-2">
                               <span className="font-medium text-black dark:text-white">Waktu:</span>
                               <span className="flex justify-end text-black dark:text-white">{item.time}</span>
                             </div>
                           </div>
-
-                          <div className="py-3 border-t border-gray-200 dark:border-neutral-700">
+                          <div className="my-3 py-3 border-t border-gray-200 dark:border-neutral-700">
                             <div className="grid grid-cols-2 gap-2">
-                              <span className="font-medium text-black dark:text-white">Is Available:</span>
+                              <span className="font-medium text-black dark:text-white">Status Konselor:</span>
                                 {item.is_available === true || item.is_available === "true" ? (
                                   <span className="text-end text-black dark:text-white">Ada</span>
                                 ) : (
-                                  <span className="text-end text-black dark:text-white">Tidak Tersedia Sekarang</span>
+                                  <span className="text-end text-black dark:text-white">Tidak Tersedia</span>
                                 )}
                             </div>
                           </div>

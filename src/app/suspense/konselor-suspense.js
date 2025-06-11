@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 // import Topbar from '@/app/components/topbar';
-// import Chart from '@/app/components/chart';
+import Chart from '@/app/components/chart';
 // import Leftbar from '@/app/components/leftbarKonselor';
 
 export default function Dashboard() {

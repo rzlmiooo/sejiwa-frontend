@@ -28,7 +28,7 @@ export default function Login() {
 
       const decoded = jwtDecode(token);
       const role = decoded.role;
-      // const studentId = decoded?.id;
+      const studentId = decoded?.id;
 
       if (!role) throw new Error("Masalah jaringan. Harap login ulang.");
 

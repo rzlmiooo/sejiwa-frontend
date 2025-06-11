@@ -47,14 +47,25 @@ export default function Ass() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const validQuestionIds = questions.map(q => q.id);
+        // const submitted = {
+        //     answers: Object.entries(answers)
+        //         .filter(([id, val]) => val.checked)
+        //         .map(([id]) => {
+        //             const question = questions.find(q => q.id === Number(id));
+        //             return question?.code;
+        //         })
+        //         .filter(Boolean) 
+        // };
         const submitted = {
             answers: Object.entries(answers)
                 .filter(([id, val]) => val.checked)
-                .map(([id]) => {
+                .map(([id, val]) => {
                     const question = questions.find(q => q.id === Number(id));
-                    return question?.code;
+                    return {
+                        code: question?.code,
+                        intensity: val.intensity,
+                    };
                 })
-                .filter(Boolean) 
         };
         try {
             console.log('Submitted Payload:', submitted);
