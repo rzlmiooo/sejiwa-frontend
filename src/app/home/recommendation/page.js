@@ -1,12 +1,12 @@
 'use client'
 
 import { Suspense } from 'react'
-import Params from '@/app/suspense/recommendation-suspense'
+import Recommendation from '@/app/suspense/recommendation-suspense'
 
-export default function Recommendation() {
+export default function Rekomen() {
     return (
       <Suspense>
-        <Params/>
+        <Recommendation />
       </Suspense>
     )
 }

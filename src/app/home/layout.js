@@ -1,7 +1,8 @@
-import Link from 'next/link'
-import Path from '../components/pathname'
-import { Bars3Icon } from '@heroicons/react/24/solid'
-import UserGreeting from '../components/greetings'
+'use client'
+
+import Sidebar from "../components/sidebar"
+import Navbar from "../components/navbar"
+import { useState } from "react"
 
 const navigation = [
     {src: '/dashboard.png', name: 'Beranda', href: '/home' },
@@ -12,31 +13,17 @@ const navigation = [
 ]
 
 export default function Homepage({ children }){
+    const [isSidebarOpen, setSidebarOpen] = useState(false)
+
+    const toggleSidebar = () => setSidebarOpen(!isSidebarOpen)
+
     return (
-        <div className="h-screen flex flex-col bg-sky-50 overflow-hidden">
+        <div className="h-screen flex flex-col bg-sky-50 dark:bg-gray-900 overflow-hidden">
             {/* header */}
-            <div className="m-0 p-4 w-screen flex justify-between items-center bg-sky-600">
-                <div className="flex justify-center items-center gap-5">
-                    <Bars3Icon className="size-8"></Bars3Icon>
-                    <Link href="/home" className="flex gap-3 text-sm/6">
-                        <img src="/icon.png" alt="" className="w-24 h-auto"></img>
-                        <Path />
-                    </Link>
-                </div>
-                <div className="flex justify-center items-center gap-3">
-                    <h1 className="hidden sm:block font-bold">Hi, <UserGreeting/></h1>
-                    <img src="/favicon.ico" alt="" className="p-1 bg-sky-50 rounded-full w-10 h-auto"></img>
-                </div>
-            </div>
+            <Navbar toggleSidebar={toggleSidebar} />
             <div className="h-screen flex flex-row">
                 {/* sidebar */}
-                <div className="p-1 w-18 sm:w-72 bg-gray-900 border-r-1 border-white">
-                    {navigation.map((item) => (
-                        <Link key={item.name} href={item.href} className="mx-5 my-8 flex flex-row items-center gap-5 text-xl font-bold hover:scale-102">
-                        <img src={item.src} className='w-5 h-5'></img><h1 className="hidden md:block">{item.name}</h1>
-                        </Link>
-                    ))}
-                </div>
+                <Sidebar isOpen={isSidebarOpen} />
                 {children}
             </div>
         </div>

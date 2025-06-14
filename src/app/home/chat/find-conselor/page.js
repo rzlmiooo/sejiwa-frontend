@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import FindConselor from "@/app/suspense/find-suspense";
+import FindConselor from "@/app/suspense/find-konselor-suspense";
 
 export default function SearchConselor(){
   return (

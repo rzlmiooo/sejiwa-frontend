@@ -1,5 +1,10 @@
+import { Suspense } from "react"
+import BookingSchedule from "@/app/suspense/bookschedule-suspense"
+
 export default function Book(){
     return (
-        <div className="bg-gray-800">Booking page</div>
+        <Suspense>
+            <BookingSchedule/>
+        </Suspense>
     )
 }

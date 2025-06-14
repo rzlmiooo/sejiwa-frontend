@@ -12,8 +12,24 @@ export default function Path(){
         pathName = 'Rekomendasi';
     } if (path == '/home/chat') {
         pathName = 'Chat Konselor';
+    } if (path == '/home/chat/booking') {
+        pathName = 'Booking';
+    } if (path == '/home/chat/booking/create-booking') {
+        pathName = 'Mulai Booking';
+    } if (path == '/home/chat/booking/history-booking') {
+        pathName = 'Riwayat Booking';
+    } if (path == '/home/chat/booking/success-booking') {
+        pathName = 'Sukses Booking';
+    } if (path == '/home/chat/booking/booking-status') {
+        pathName = 'Status Booking';
+    } if (path == '/home/chat/find-conselor') {
+        pathName = 'Cari Konselor';
+    } if (path == '/home/chat/chat-pelajar') {
+        pathName = 'Chat';
     } if (path == '/home/settings') {
         pathName = 'Pengaturan';
+    } if (path == '/home/settings/profile') {
+        pathName = 'Profil Saya';
     }
 
     return pathName; 
