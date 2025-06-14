@@ -10,6 +10,8 @@ export const AuthService = {
                 }
             );
 
+            console.log(response.data)
+
             return response.data;
         } catch (error) {
             console.error("Login error:", error.response?.data || error.message);

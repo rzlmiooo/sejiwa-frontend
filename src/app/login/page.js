@@ -30,7 +30,7 @@ export default function Login() {
       const role = decoded.role;
       const studentId = decoded?.id;
 
-      if (!role) throw new Error("Masalah jaringan. Harap login ulang.");
+      if (!role) throw new Error("Role not found in token");
 
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
