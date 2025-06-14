@@ -6,6 +6,7 @@ export const AuthService = {
             const response = await axios.post("https://sejiwa.onrender.com/api/login",
                 { email, password },
                 {
+                    withCredentials: true,
                     headers: { "Content-Type": "application/json" }
                 }
             );
