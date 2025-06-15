@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { useRouter } from "next/navigation";
 import { getStudentId } from "@/app/utils/auth/auth";
-import Back from "../components/back";
+import Back from "../../components/back";
 
 export default function FindConselor() {
   const router = useRouter();

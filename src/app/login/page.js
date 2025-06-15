@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Josefin_Slab } from "next/font/google";
 import { AuthService } from "../service/AuthService";
+import generateUsernameFromEmail from '@/app/utils/auth/generateUsernameFromEmail'
 
 const josefinSlab = Josefin_Slab({
   variable: "--font-josefin-slab",
@@ -24,14 +25,23 @@ export default function Login() {
 
     try {
       const token = await AuthService.login(email, password);
+      // const token = result.token;
       console.log("Login Successful:", token);
 
       const decoded = jwtDecode(token);
       const role = decoded.role;
       const studentId = decoded?.id;
+      let username = decoded.username;
+      if (!username) {
+        username = generateUsernameFromEmail(email);
+      }
+
+      console.log("Hello,", username);
+      console.log("Decoded JWT:", decoded);
 
       if (!role) throw new Error("Role not found in token");
 
+      localStorage.setItem("username", username);
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
 

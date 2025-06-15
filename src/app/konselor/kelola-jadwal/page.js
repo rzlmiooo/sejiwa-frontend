@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import KelolaJadwal from "@/app/suspense/jadwal-suspense";
+import KelolaJadwal from "@/app/suspense/konselor/jadwal-suspense";
 
 export default function Jadwal(){
     return (

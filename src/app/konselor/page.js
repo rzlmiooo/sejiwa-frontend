@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Dashboard from "../suspense/konselor-suspense";
+import Dashboard from "../suspense/konselor/konselor-suspense";
 
 export default function Home(){
     return (

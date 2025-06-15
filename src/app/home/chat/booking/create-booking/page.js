@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import CreateBooking from "@/app/suspense/create-booking-suspense";
+import CreateBooking from "@/app/suspense/students/create-booking-suspense";
 
 export default function CreateBook(){
     return(

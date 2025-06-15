@@ -1,10 +1,10 @@
 'use client'
 
-import Sidebar from "../components/sidebar"
+import KonselorSidebar from "../components/konselor-sidebar"
 import Navbar from "../components/navbar"
 import { useState } from "react"
 
-export default function Homepage({ children }){
+export default function Konselor({ children }){
     const [isSidebarOpen, setSidebarOpen] = useState(false)
 
     const toggleSidebar = () => setSidebarOpen(!isSidebarOpen)
@@ -15,7 +15,7 @@ export default function Homepage({ children }){
             <Navbar toggleSidebar={toggleSidebar} />
             <div className="h-screen flex flex-row">
                 {/* sidebar */}
-                <Sidebar isOpen={isSidebarOpen} />
+                <KonselorSidebar isOpen={isSidebarOpen} />
                 {children}
             </div>
         </div>

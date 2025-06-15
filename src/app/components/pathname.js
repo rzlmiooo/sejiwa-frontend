@@ -30,6 +30,19 @@ export default function Path(){
         pathName = 'Pengaturan';
     } if (path == '/home/settings/profile') {
         pathName = 'Profil Saya';
+
+    } if (path == '/konselor') {
+        pathName = 'Dashboard';
+    } if (path == '/konselor/bookings') {
+        pathName = 'Booking';
+    } if (path == '/konselor/chat-konselor') {
+        pathName = 'Chat';
+    } if (path == '/konselor/kelola-jadwal') {
+        pathName = 'Kelola Jadwal';
+    } if (path == '/konselor/riwayat-konsultasi') {
+        pathName = 'Riwayat Konsultasi';
+    } if (path == '/konselor/profile') {
+        pathName = 'Profil Konselor';
     }
 
     return pathName; 

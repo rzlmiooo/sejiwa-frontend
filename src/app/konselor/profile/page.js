@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Profile from "@/app/suspense/profile-suspense";
+import Profile from "@/app/suspense/konselor/profile-suspense";
 
 export default function ProfilePage(){
     return (

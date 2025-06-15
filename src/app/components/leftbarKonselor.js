@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Bars3Icon } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react';
 import { AuthService } from '../service/AuthService';
 
@@ -17,7 +16,7 @@ export default function Leftbar() {
             console.error("Logout error:", err?.response?.data || err.message);
             setError(err?.response?.data?.message || "Logout failed");
         }
-    };
+    }
 
     return (
         <div>

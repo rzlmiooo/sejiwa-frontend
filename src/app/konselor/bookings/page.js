@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import BookingHome from "@/app/suspense/konselor-booking-suspense";
+import BookingHome from "@/app/suspense/konselor/konselor-bookings-suspense";
 
 export default function Booking(){
   return(

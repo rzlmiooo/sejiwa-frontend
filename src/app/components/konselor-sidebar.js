@@ -1,21 +1,21 @@
 'use client'
-
 import { useState } from 'react';
-import Link from 'next/link'
 import { AuthService } from '../service/AuthService';
 import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/solid';
+import Link from 'next/link'
 
 const navigation = [
-    {src: '/dashboard.png', name: 'Beranda', href: '/home' },
-    {src: '/assessment.png', name: 'Assessment', href: '/home/assessment' },
-    {src: '/like.png', name: 'Rekomendasi', href: '/home/recommendation' },
-    {src: '/chat.png', name: 'Chat Konselor', href: '/home/chat' },
-    {src: '/settings.png', name: 'Pengaturan', href: '/home/settings' }
+    {src: '/dashboard.png', name: 'Dashboard', href: '/konselor' },
+    {src: '/booking.png', name: 'Booking', href: '/konselor/bookings' },
+    {src: '/chat.png', name: 'Chat', href: '/konselor/chat-konselor' },
+    {src: '/edit.png', name: 'Kelola Jadwal', href: '/konselor/kelola-jadwal' },
+    {src: '/history.png', name: 'Riwayat Konsultasi', href: '/konselor/riwayat-konsultasi' },
+    {src: '/profile.png', name: 'Profil', href: '/konselor/profile' }
 ]
 
-export default function Sidebar({ isOpen }) {
+export default function KonselorSidebar({ isOpen }) {
     const [error, setError] = useState("");
-        
+    
     const logout = async (e) => {
         e.preventDefault();
         setError("");
@@ -37,7 +37,7 @@ export default function Sidebar({ isOpen }) {
         >
             {navigation.map((item) => (
                 <Link key={item.name} href={item.href} className="mx-5 my-8 flex flex-row items-center gap-5 hover:scale-102">
-                    <img src={item.src} className='size-5 invert dark:invert-0'></img>{ isOpen && <h1 className="p-0 text-lg font-bold text-sky-900 dark:text-sky-50">{item.name}</h1> }
+                    <img src={item.src} className='size-5 invert dark:invert-0'></img>{ isOpen && <h1 className="p-0 text-sm font-bold text-sky-900 dark:text-sky-50">{item.name}</h1> }
                 </Link>
             ))}
             <Link onClick={logout} href="" className="mx-5 my-8 flex flex-row items-center gap-4 hover:scale-102">

@@ -18,7 +18,7 @@ export default function Navbar({ toggleSidebar, isSidebarOpen }) {
             </div>
             <Link href="/home/settings/profile/" className="flex justify-center items-center gap-3">
                 <h1 className="hidden sm:block font-bold text-sky-50 dark:text-sky-50">Hi, <UserGreeting/></h1>
-                <img src="/favicon.ico" alt="" className="p-1 bg-sky-50 dark:bg-sky-50 rounded-full w-10 h-auto"></img>
+                <img src="/profile.png" alt="" className="p-1 bg-sky-50 dark:bg-sky-50 rounded-full w-10 h-auto"></img>
             </Link>
         </div>
     )
