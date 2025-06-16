@@ -3,6 +3,14 @@ import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ACCESS_TOKEN_NAME } from "../constants/apiConstants";
+import { Rubik } from "next/font/google"
+
+const rubik = Rubik({
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+    variable: '--font-rubik',
+    display: 'swap'
+})
 
 export default function RegistrationForm() {
   const router = useRouter();
@@ -88,7 +96,7 @@ export default function RegistrationForm() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen overflow-hidden">
+    <div className={`flex justify-center items-center h-screen overflow-hidden ${rubik.className}`}>
       {/* scroll */}
       <div className="hidden sm:flex object-cover justify-center items-center w-full gap-5 bg-sky-50">
         <div className="mt-84 flex flex-col gap-5 animate-scroll-up">
@@ -127,12 +135,12 @@ export default function RegistrationForm() {
             <h1 className="text-l text-white">Register</h1>
           </div>
           <div className="mx-5 my-3">
-            <label htmlFor="username" className="text-sm/6 font-medium text-white">User Name</label>
+            <label htmlFor="username" className="text-sm/6 font-medium text-white">Username</label>
             <input
               type="text"
-              className="mt-2 block w-full rounded-lg border-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
+              className="mt-3 block w-full rounded-lg border-none focus:outline-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
               id="username"
-              placeholder="Add User Name"
+              placeholder="Buat username Anda"
               value={state.username}
               onChange={handleChange}
             />
@@ -141,9 +149,9 @@ export default function RegistrationForm() {
             <label htmlFor="email" className="text-sm/6 font-medium text-white">Email address</label>
             <input
               type="email"
-              className="mt-2 block w-full rounded-lg border-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
+              className="mt-3 block w-full rounded-lg border-none focus:outline-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
               id="email"
-              placeholder="Enter email"
+              placeholder="Masukkan email Anda"
               value={state.email}
               onChange={handleChange}
             />
@@ -152,33 +160,33 @@ export default function RegistrationForm() {
             <label htmlFor="password" className="text-sm/6 font-medium text-white">Password</label>
             <input
               type="password"
-              className="mt-2 block w-full rounded-lg border-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
+              className="mt-3 block w-full rounded-lg border-none focus:outline-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
               id="password"
-              placeholder="Password"
+              placeholder="Buat password yang kuat"
               value={state.password}
               onChange={handleChange}
             />
           </div>
           <div className="mx-5 my-3">
-            <label htmlFor="confirmPassword" className="text-sm/6 font-medium text-white">Confirm Password</label>
+            <label htmlFor="confirmPassword" className="text-sm/6 font-medium text-white">Konfirmasi Password</label>
             <input
               type="password"
               className="mt-2 block w-full rounded-lg border-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
               id="confirmPassword"
-              placeholder="Confirm Password"
+              placeholder="Ketik ulang password"
               value={state.confirmPassword}
               onChange={handleChange}
             />
           </div>
           <div className="mx-5 my-3">
-            <label htmlFor="role" className="text-sm/6 font-medium">Choose a Role</label>
+            <label htmlFor="role" className="text-sm/6 font-medium">Anda disini sebagai: </label>
             <select
               id="role"
-              className="ml-2 p-1 text-sm/6 text-gray-900 bg-white font-medium border-2 border-sky-600 rounded-xl"
+              className="ml-2 p-1 border-none focus:outline-none text-sm/6 text-gray-900 bg-white font-medium border-2 border-sky-600 rounded-xl"
               value={state.role}
               onChange={handleChange}
             >
-              <option value="" className="bg-sky-500">Select Role</option>
+              <option value="" className="bg-sky-500">Pilih Role</option>
               <option value="pelajar" className="text-gray-900 font-bold">Pelajar</option>
               <option value="konselor" className="text-gray-900 font-bold">Konselor</option>
               {/* <option value="admin" className="text-gray-900 font-bold">Admin</option> */}
@@ -187,10 +195,10 @@ export default function RegistrationForm() {
 
           <button
             type="submit"
-            className="mx-5 rounded-lg bg-sky-600 px-19 py-2 text-sm text-white active:bg-sky-700 hover:bg-sky-500 cursor-pointer"
+            className="mx-5 rounded-lg bg-sky-600 px-20.5 py-2 text-sm text-white active:bg-sky-700 hover:bg-sky-500 cursor-pointer"
             onClick={handleSubmitClick}
           >
-            Register
+            Daftar
           </button>
 
           {state.successMessage && (

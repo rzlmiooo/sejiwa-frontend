@@ -3,9 +3,16 @@
 import { jwtDecode } from 'jwt-decode';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Josefin_Slab } from "next/font/google";
+import { Josefin_Slab, Rubik } from "next/font/google";
 import { AuthService } from "../service/AuthService";
 import generateUsernameFromEmail from '@/app/utils/auth/generateUsernameFromEmail'
+
+const rubik = Rubik({
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+    variable: '--font-rubik',
+    display: 'swap'
+})
 
 const josefinSlab = Josefin_Slab({
   variable: "--font-josefin-slab",
@@ -60,7 +67,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen overflow-hidden">
+    <div className={`flex justify-center items-center h-screen overflow-hidden ${rubik.className}`}>
 
       {/* scroll */}
       <div className="hidden sm:flex object-cover justify-center items-center w-full gap-5 bg-sky-50">
@@ -111,7 +118,7 @@ export default function Login() {
               <label htmlFor="email" className="text-sm/6 font-medium text-white">Email address</label>
               <input
                 type="email"
-                className="mt-3 block w-full rounded-lg border-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
+                className="mt-3 block w-full rounded-lg border-none focus:outline-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
                 id="email"
                 placeholder="Enter email"
                 value={email}
@@ -124,7 +131,7 @@ export default function Login() {
               <label htmlFor="password" className="text-sm/6 font-medium text-white">Password</label>
               <input
                 type="password"
-                className="mt-3 block w-full rounded-lg border-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
+                className="mt-3 block w-full rounded-lg border-none focus:outline-none bg-white/5 px-3 py-1.5 text-sm/6 text-white"
                 id="password"
                 placeholder="Password"
                 value={password}

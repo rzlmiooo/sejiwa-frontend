@@ -11,7 +11,7 @@ export default function Navbar({ toggleSidebar, isSidebarOpen }) {
                 <div onClick={toggleSidebar} className="size-8 cursor-pointer text-sky-50 dark:text-sky-50">
                     { isSidebarOpen ? <XMarkIcon/> : <Bars3Icon/> }
                 </div>
-                <Link href="/home" className="flex gap-3 text-sm/6 text-sky-50 dark:text-sky-50">
+                <Link href="/home" className="flex gap-3 text-sm/6 text-sky-50 dark:text-sky-50 border-none outline-none shadow-none focus:outline-none">
                     <img src="/icon.png" alt="" className="w-24 h-auto"></img>
                     <Path />
                 </Link>
