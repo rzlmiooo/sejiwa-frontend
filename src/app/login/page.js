@@ -67,7 +67,7 @@ export default function Login() {
   };
 
   return (
-    <div className={`flex justify-center items-center h-screen overflow-hidden ${rubik.className}`}>
+    <div className={`flex justify-center items-center h-screen overflow-hidden ${rubik.className  }`}>
 
       {/* scroll */}
       <div className="hidden sm:flex object-cover justify-center items-center w-full gap-5 bg-sky-50">

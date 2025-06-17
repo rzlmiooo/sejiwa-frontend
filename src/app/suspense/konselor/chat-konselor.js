@@ -119,22 +119,28 @@ export default function ChatKonselor() {
     return (
         <div className="text-gray-900 dark:text-sky-50 p-8 pr-22 sm:pr-6 w-full mx-auto">
             <h1 className="text-2xl font-bold mb-4">Sejiwa Chat App</h1>
-            {/* {roomCode?.length > 0 ? (
-                roomCode.map((room) => (
-                    <h2 key={room.id}>Your Room ID: {room.id}</h2>
-                ))
-            ) : (
-                <p>No rooms found.</p>
-            )} */}
+            <div className="flex gap-2 text-xs text-gray-900 dark:text-sky-50">
+                Room ID tersedia:
+                {roomCode?.length > 0 ? (
+                    roomCode.map((room) => (
+                        <h2 key={room.id}>{room.id},</h2>
+                    ))
+                ) : (
+                    <p>No rooms found.</p>
+                )}
+            </div>
             {!roomId && (
                 <>
-                    <div>
+                    <div className="my-5">
+                        <span className="mr-2">Room ID:</span>
                         <input
-                            placeholder="Enter room ID diatas"
+                            placeholder="Pilih dari room ID diatas"
                             value={inputRoomId}
                             onChange={(e) => setInputRoomId(e.target.value)}
+                            className="text-lg border-none focus:outline-none"
+                            onKeyDown={(e) => e.key === 'Enter' && handleJoinRoom()}
                         />
-                        <button onClick={handleJoinRoom}>Join Room</button>
+                        <button onClick={handleJoinRoom} className="p-2 rounded-2xl bg-sky-600 hover:bg-sky-500">Join Room</button>
                     </div>
                 </>
             )}
@@ -183,7 +189,7 @@ export default function ChatKonselor() {
                 // </>
 <>
                 <h2 className="text-lg font-bold mt-4 mb-4">
-                    Room ID: <strong>{roomId}</strong> — <span className="font-light">ingat Room ID ini agar bisa melanjutkan kembali chat dengan Pelajar yang sama.</span>
+                    Room ID: <strong>{roomId}</strong> — <span className="font-light">ingat Room ID ini agar bisa melanjutkan kembali Chat dengan Pelajar yang sama.</span>
                 </h2>
                 <div className="border border-gray-300 p-4 h-[300px] overflow-y-auto mb-4 rounded bg-sky-50 dark:bg-gray-800">
                     {messages.map((msg, idx) => (

@@ -15,7 +15,6 @@ export default function Setting() {
       <div className="bg-green-100 p-6 rounded-xl flex flex-col items-center justify-center text-center">
         <h2 className="text-xl font-semibold">Analitik</h2>
         <p className="text-sm text-gray-600">Pantau performa harian</p>
-        <div className="mt-6 text-5xl">🧠<ThemeToggle/>
       </div>
 
       {/* 🛠️ Item 3 */}
@@ -26,7 +25,7 @@ export default function Setting() {
       </div>
       </div>
 
-      </div>
     </div>
+    
   )
 }
