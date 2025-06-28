@@ -100,9 +100,9 @@ export default function Ass() {
                                 <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                     {/* <!-- Input --> */}
                                     <div class="sm:col-span-1">
-                                        <label htmlFor="hs-as-table-product-review-search" class="sr-only">Search</label>
+                                        <label htmlFor="hs-as-table-product-review-search" class="sr-only">Apa yang kamu rasakan?</label>
                                         <div class="relative">
-                                            <input type="text" id="hs-as-table-product-review-search" name="hs-as-table-product-review-search" class="py-2 px-3 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Search" />
+                                            <input type="text" id="hs-as-table-product-review-search" name="hs-as-table-product-review-search" class="py-2 px-3 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Cari" />
                                             <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4">
                                                 <svg class="shrink-0 size-4 text-gray-400 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
                                             </div>
@@ -198,7 +198,7 @@ export default function Ass() {
                                                 {/* <th className="px-6 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Deskripsi Singkat</th> */}
                                                 <th className="px-1 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">CheckBox</th>
                                                 <th className="px-6 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Intensitas</th>
-                                                <th className="px-0 pl-4 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Harian/Mingguan</th>
+                                                {/* <th className="px-0 pl-4 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Harian/Mingguan</th> */}
                                                 <th className="px-6 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Catatan Pasien</th>
                                             </tr>
                                         </thead>
@@ -225,7 +225,7 @@ export default function Ass() {
                                                             <option value="high">High</option>
                                                         </select>
                                                     </td>
-                                                    <td className="px-4 py-4">
+                                                    {/* <td className="px-4 py-4">
                                                         <select
                                                             onChange={e => handleChange(q.id, 'duration', e.target.value)}
                                                             className="border rounded px-2 py-1 text-sm dark:bg-neutral-800 dark:text-white">
@@ -233,7 +233,7 @@ export default function Ass() {
                                                             <option value="daily">Harian</option>
                                                             <option value="weekly">Mingguan</option>
                                                         </select>
-                                                    </td>
+                                                    </td> */}
                                                     <td className="px-6 py-4">
                                                         <input
                                                             type="text"

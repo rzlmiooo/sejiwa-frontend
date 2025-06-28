@@ -23,10 +23,7 @@ export default function ChatKonselor() {
     const [error, setError] = useState("");
     const studentId = searchParams.get('student_id');
     const [loading, setLoading] = useState(false);
-
-
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-
     const socketRef = useRef(null);
 
     useEffect(() => {
@@ -146,48 +143,7 @@ export default function ChatKonselor() {
             )}
 
             {roomId && (
-                // <>
-                //     <h2>Room ID: {roomId}</h2>
-                //     <div
-                //         style={{
-                //             border: "1px solid #ccc",
-                //             padding: "1rem",
-                //             height: "300px",
-                //             overflowY: "auto",
-                //             marginBottom: "1rem",
-                //         }}
-                //     >
-                //         {messages.map((msg, idx) => (
-                //             <div key={idx} className="mb-2">
-                //                 {msg.sender_role === "User" && (
-                //                     <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">
-                //                         User
-                //                     </span>
-                //                 )}
-
-                //                 {msg.sender_role === "Konselor" && (
-                //                     <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">
-                //                         Konselor
-                //                     </span>
-                //                 )}
-
-                //                 <span>{msg.message}</span>
-                //             </div>
-                //         ))}
-                //         <div ref={messagesEndRef} />
-                //     </div>
-
-                //     <div>
-                //         <input
-                //             value={message}
-                //             onChange={(e) => setMessage(e.target.value)}
-                //             placeholder="Your message..."
-                //             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                //         />
-                //         <button onClick={sendMessage}>Send</button>
-                //     </div>
-                // </>
-<>
+                <>
                 <h2 className="text-lg font-bold mt-4 mb-4">
                     Room ID: <strong>{roomId}</strong> — <span className="font-light">ingat Room ID ini agar bisa melanjutkan kembali Chat dengan Pelajar yang sama.</span>
                 </h2>

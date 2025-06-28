@@ -1,15 +1,17 @@
 'use client';
 
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getStudentId } from "../../utils/auth/auth";
-import 'react-datepicker/dist/react-datepicker.css';
+import { getStudentId } from "@/app/utils/auth/auth";
 
 export default function KelolaJadwal() {
     const router = useRouter();
     const counselorId = getStudentId();
     const [schedule, setScheduleData] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     const redirectToCreateSchedule = () => router.push('/konselor/kelola-jadwal/create-jadwal');
     const redirectToUpdateSchedule = () => router.push('/konselor/kelola-jadwal/update-jadwal');
@@ -22,24 +24,26 @@ export default function KelolaJadwal() {
         errorMessage: null
     });
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-
     const fetchUserSchedules = async () => {
         try {
-            const schedulesRes = await axios.get('https://sejiwa.onrender.com/api/schedules', {
+            setLoading(true);
+            const res = await axios.get('https://sejiwa.onrender.com/api/schedules', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             });
 
-            const allSchedules = schedulesRes.data || [];
+            const allSchedules = res.data || [];
 
-            const scheduleUser = allSchedules.filter(
-                (schedule) => String(schedule.counselor_id) === String(counselorId)
+            const filtered = allSchedules.filter(
+                (s) => String(s.counselor_id) === String(counselorId)
             );
 
-            setScheduleData(scheduleUser);
+            console.log("All Schedules:", allSchedules);
+            console.log("Filtered Schedules:", filtered);
+
+            setScheduleData(filtered);
         } catch (err) {
             console.error('Error fetching schedules:', err);
         } finally {
@@ -47,14 +51,11 @@ export default function KelolaJadwal() {
         }
     };
 
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setState((prev) => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+    useEffect(() => {
+        if (token && counselorId) {
+            fetchUserSchedules();
+        }
+    }, [token, counselorId]);
 
     const handleSubmitClick = async (e) => {
         e.preventDefault();
@@ -81,6 +82,7 @@ export default function KelolaJadwal() {
                     successMessage: "Schedule successfully saved!",
                     errorMessage: null,
                 }));
+                fetchUserSchedules(); // ⬅️ Refresh data
             }
         } catch (error) {
             setState((prev) => ({
@@ -91,21 +93,39 @@ export default function KelolaJadwal() {
     };
 
     return (
-        <div className="flex h-screen">
-            <main className="flex-1 p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
-                <div className="p-6">
-                    <h1 className="text-2xl font-bold mb-4">Kelola Jadwal</h1>
-
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {schedule.map((schedule) => (
+        <div className="flex-1 h-auto p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white overflow-auto">
+            <div className="p-6 mb-10">
+                <h1 className="text-2xl font-bold mb-4">Kelola Jadwal</h1>
+                <div className="mt-auto flex">
+                    <div>
+                        <button
+                            type="button"
+                            className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-8 py-2.5 text-center m-2"
+                            onClick={redirectToCreateSchedule}
+                        >
+                            Buat Jadwal
+                        </button>
+                    </div>
+                    <div>
+                        <button
+                            type="button"
+                            className="text-blue-700 hover:text-white border border-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-8 py-2.5 text-center m-2"
+                            onClick={redirectToUpdateSchedule}
+                        >
+                            Ubah Jadwal
+                        </button>
+                    </div>
+                </div>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {schedule.map((s) => (
                         <div
-                            key={schedule.id}
+                            key={s.id}
                             className="group flex flex-col h-full bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
                         >
                             <div className="h-52 flex justify-center items-center bg-gray-600 rounded-t-xl">
                                 <img
-                                    className="size-full object-cover rounded-2xl"
-                                    src="/profile/profile-2.jpg"
+                                    className="size-full object-contain rounded-2xl"
+                                    src="/users/profile-2.jpg"
                                     alt="Profile"
                                 />
                             </div>
@@ -114,40 +134,20 @@ export default function KelolaJadwal() {
                                     Schedule Request
                                 </span>
                                 <h3 className="text-xl font-semibold text-gray-800 dark:text-neutral-300 dark:hover:text-white">
-                                    {schedule.date}
+                                    {s.date}
                                 </h3>
                                 <p className="mt-3 text-gray-500 dark:text-neutral-500">
-                                    {booking.time}
+                                    {s.time}
                                 </p>
-                                 <p className="mt-3 text-gray-500 dark:text-neutral-500">
-                                    {booking.is_available}
+                                <p className="mt-3 text-gray-500 dark:text-neutral-500">
+                                    {s.is_available === "true" ? "Tersedia" : "Tidak Tersedia"}
                                 </p>
                             </div>
-                            <div className="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 dark:border-neutral-700 dark:divide-neutral-700">
-                                <div>
-                                    <button
-                                        type="button"
-                                        className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-8 py-2.5 text-center m-2"
-                                        onClick={redirectToCreateSchedule}
-                                    >
-                                        Buat Jadwal
-                                    </button>
-                                </div>
-                                <div>
-                                    <button
-                                        type="button"
-                                        className="text-blue-700 hover:text-white border border-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-8 py-2.5 text-center m-2"
-                                        onClick={redirectToUpdateSchedule}
-                                    >
-                                        Ubah Jadwal
-                                    </button>
-                                </div>
-                            </div>
+                            
                         </div>
                     ))}
-                    </div>
                 </div>
-            </main >
-        </div >
+            </div>
+        </div>
     );
 }

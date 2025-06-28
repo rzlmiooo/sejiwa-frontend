@@ -7,6 +7,7 @@ import Link from 'next/link'
 const navigation = [
     {src: '/dashboard.png', name: 'Dashboard', href: '/konselor' },
     {src: '/booking.png', name: 'Booking', href: '/konselor/bookings' },
+    {src: '/assessment.png', name: 'Hasil Assessment', href: '/konselor/hasil-assessment' },
     {src: '/chat.png', name: 'Chat', href: '/konselor/chat-konselor' },
     {src: '/edit.png', name: 'Kelola Jadwal', href: '/konselor/kelola-jadwal' },
     {src: '/history.png', name: 'Riwayat Konsultasi', href: '/konselor/riwayat-konsultasi' },

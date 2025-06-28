@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Path from '../components/pathname'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import UserGreeting from '../components/greetings'
+import UserProfile from './foto'
 
 export default function Navbar({ toggleSidebar, isSidebarOpen }) {
     return (
@@ -18,7 +19,7 @@ export default function Navbar({ toggleSidebar, isSidebarOpen }) {
             </div>
             <Link href="/home/settings/profile/" className="flex justify-center items-center gap-3">
                 <h1 className="hidden sm:block font-bold text-sky-50 dark:text-sky-50">Hi, <UserGreeting/></h1>
-                <img src="/profile.png" alt="" className="p-1 bg-sky-50 dark:bg-sky-50 rounded-full w-10 h-auto"></img>
+                <UserProfile />
             </Link>
         </div>
     )

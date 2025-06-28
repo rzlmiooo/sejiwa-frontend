@@ -3,12 +3,31 @@
 import KonselorSidebar from "../components/konselor-sidebar"
 import Navbar from "../components/navbar"
 import { useState } from "react"
-import { Rubik } from "next/font/google"
+import localFont from "next/font/local"
 
-const rubik = Rubik({
-    subsets: ['latin'],
-    weight: ['400', '500', '700'],
-    variable: '--font-rubik',
+const rubik = localFont({
+    src: [
+        {
+            path: '../fonts/Rubik/rubik-v30-latin-300.woff2',
+            weight: '300',
+            style: 'normal',
+        },
+        {
+          path: '../fonts/Rubik/rubik-v30-latin-500.woff2',
+          weight: '500',
+          style: 'normal',
+        },
+        {
+          path: '../fonts/Rubik/rubik-v30-latin-700.woff2',
+          weight: '700',
+          style: 'normal',
+        },
+        {
+          path: '../fonts/Rubik/rubik-v30-latin-regular.woff2',
+          weight: '400',
+          style: 'normal',
+        }
+    ],
     display: 'swap'
 })
   

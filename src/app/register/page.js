@@ -3,12 +3,15 @@ import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ACCESS_TOKEN_NAME } from "../constants/apiConstants";
-import { Rubik } from "next/font/google"
+import localFont from "next/font/local"
 
-const rubik = Rubik({
-    subsets: ['latin'],
-    weight: ['400', '500', '700'],
-    variable: '--font-rubik',
+const rubik = localFont({
+    src: [
+        {
+          path: '../fonts/Rubik/rubik-v30-latin-regular.woff2',
+          style: 'normal',
+        },
+    ],
     display: 'swap'
 })
 

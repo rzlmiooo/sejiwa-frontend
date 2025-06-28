@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { io } from "socket.io-client";
 import { getStudentId } from "@/app/utils/auth/auth";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
+import { useRouter } from "next/navigation";
 
 export default function Chat() {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,10 +20,17 @@ export default function Chat() {
     const senderId = getStudentId();
     const [error, setError] = useState("");
     const sessionId = `session-${roomId}`;
+    const [userLogin, setUserLogin] = useState([]);
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     const socketRef = useRef(null);
+
+    const router = useRouter();
+
+    const handleSelect = (schedule_id, counselor_id) => {
+        router.push(`/konselor/hasil-assessment?student_id=${senderId}`);
+    };
 
     useEffect(() => {
         if (!roomId || socketRef.current) return;
@@ -52,6 +60,21 @@ export default function Chat() {
         };
     }, [roomId]);
 
+    const fetchData = async () => {
+        try {
+            const usersRes = await axios.get('https://sejiwa.onrender.com/api/users', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            const users = usersRes.data || [];
+            const user = users.find(u => u.id === senderId);
+            setUserLogin([user]);
+        } catch (err) {
+            console.error('Error fetching data:', err);
+        }
+    };
 
     const handleCreateRoom = async (e) => {
         if (!token) return;
@@ -75,6 +98,7 @@ export default function Chat() {
             if (res.status === 201 || res.status === 200) {
                 const newRoomId = res.data.id;
                 console.log('New Room ID:', newRoomId);
+                handleSelect();
                 setRoomId(newRoomId);
             } else {
                 console.error('Failed to create room:', res.status);
@@ -105,6 +129,8 @@ export default function Chat() {
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
+
+    fetchData();
 
     return (
         <div className="text-gray-900 dark:text-sky-50 p-8 pr-22 sm:pr-6 w-full mx-auto">

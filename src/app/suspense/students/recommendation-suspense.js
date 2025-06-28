@@ -53,7 +53,7 @@ export default function Recommendation() {
 
   if (loading) return (
     <div className="m-auto flex flex-col justify-center items-center gap-4">
-      <p className="text-gray-700">Kamu belum mengisi Assessment</p>
+      <p className="text-gray-700 dark:text-gray-100">Kamu belum mengisi Assessment</p>
       <Link href="/home/assessment" className="px-5 py-2 rounded-4xl bg-sky-600 hover:bg-sky-500 text-sky-50 flex items-center">Pergi ke Assessment <ArrowRightIcon className="size-4"/></Link>
     </div>
   )

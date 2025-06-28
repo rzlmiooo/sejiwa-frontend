@@ -3,21 +3,30 @@
 import { jwtDecode } from 'jwt-decode';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Josefin_Slab, Rubik } from "next/font/google";
 import { AuthService } from "../service/AuthService";
 import generateUsernameFromEmail from '@/app/utils/auth/generateUsernameFromEmail'
+import localFont from "next/font/local"
 
-const rubik = Rubik({
-    subsets: ['latin'],
-    weight: ['400', '500', '700'],
-    variable: '--font-rubik',
+const rubik = localFont({
+    src: [
+        {
+          path: '../fonts/Rubik/rubik-v30-latin-regular.woff2',
+          style: 'normal',
+        },
+    ],
     display: 'swap'
 })
 
-const josefinSlab = Josefin_Slab({
-  variable: "--font-josefin-slab",
-  subsets: ["latin"],
-});
+const josefinSlab = localFont({
+    src: [
+        {
+          path: '../fonts/Josefin_Slab/josefin-slab-v28-latin-regular.woff2',
+          weight: '400',
+          style: 'normal',
+        },
+    ],
+    display: 'swap'
+})
 
 export default function Login() {
   const router = useRouter();

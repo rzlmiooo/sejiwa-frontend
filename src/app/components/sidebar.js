@@ -40,10 +40,6 @@ export default function Sidebar({ isOpen }) {
                     <img src={item.src} className='size-5 invert dark:invert-0'></img>{ isOpen && <h1 className="p-0 text-sm font-bold text-sky-900 dark:text-sky-50">{item.name}</h1> }
                 </Link>
             ))}
-            <Link onClick={logout} href="" className="mx-5 my-8 flex flex-row items-center gap-4 hover:scale-102">
-                <ArrowLeftStartOnRectangleIcon className='size-6 invert dark:invert-0'/>
-                { isOpen && <h1 className="p-0 text-sm font-bold text-sky-900 dark:text-sky-50">Keluar</h1> }
-            </Link>
         </div>
     )
 }
