@@ -76,7 +76,7 @@ export default function KelolaJadwal() {
                 },
             });
 
-            if (res.status === 200) {
+            if (res.status === 200 || res.status === 201) {
                 setState((prev) => ({
                     ...prev,
                     successMessage: "Schedule successfully saved!",

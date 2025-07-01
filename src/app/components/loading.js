@@ -1,8 +1,19 @@
-export default function LoadingOverlay() {
-    return (
-      <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
+import { useTransition, useEffect } from 'react'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+import { usePathname } from 'next/navigation'
+
+export default function LoadingIndicator() {
+  const pathname = usePathname()
+  const [isPending, startTransition] = useTransition()
+
+  useEffect(() => {
+    let timer = setTimeout(() => NProgress.start(), 200) // kasih delay
+    return () => {
+      clearTimeout(timer)
+      NProgress.done()
+    }
+  }, [pathname])
+
+  return null
 }
-  

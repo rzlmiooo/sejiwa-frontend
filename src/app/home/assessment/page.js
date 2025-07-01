@@ -199,7 +199,7 @@ export default function Ass() {
                                                 <th className="px-1 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">CheckBox</th>
                                                 <th className="px-6 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Intensitas</th>
                                                 {/* <th className="px-0 pl-4 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Harian/Mingguan</th> */}
-                                                <th className="px-6 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Catatan Pasien</th>
+                                                <th className="px-6 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Kata-kata Motivasi</th>
                                             </tr>
                                         </thead>
 
@@ -207,7 +207,6 @@ export default function Ass() {
                                             {questions.map((q) => (
                                                 <tr key={q.id} className="bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800">
                                                     <td className="px-6 py-4 text-sm font-semibold text-gray-800 dark:text-neutral-200">{q.label}</td>
-                                                    {/* <td className="px-6 py-4 text-sm text-gray-600 dark:text-neutral-400">Deskripsi placeholder</td> */}
                                                     <td className="px-1 py-4">
                                                         <input
                                                             type="checkbox"
@@ -225,22 +224,8 @@ export default function Ass() {
                                                             <option value="high">High</option>
                                                         </select>
                                                     </td>
-                                                    {/* <td className="px-4 py-4">
-                                                        <select
-                                                            onChange={e => handleChange(q.id, 'duration', e.target.value)}
-                                                            className="border rounded px-2 py-1 text-sm dark:bg-neutral-800 dark:text-white">
-                                                            <option value="">-</option>
-                                                            <option value="daily">Harian</option>
-                                                            <option value="weekly">Mingguan</option>
-                                                        </select>
-                                                    </td> */}
                                                     <td className="px-6 py-4">
-                                                        <input
-                                                            type="text"
-                                                            placeholder="Opsional"
-                                                            onChange={e => handleChange(q.id, 'notes', e.target.value)}
-                                                            className="w-full border rounded px-2 py-1 text-sm dark:bg-neutral-800 dark:text-white"
-                                                        />
+                                                        {q.quote}
                                                     </td>
                                                 </tr>
                                             ))}

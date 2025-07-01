@@ -3,8 +3,13 @@ import Path from '../components/pathname'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import UserGreeting from '../components/greetings'
 import UserProfile from './foto'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar({ toggleSidebar, isSidebarOpen }) {
+    const pathname = usePathname();
+    const isCounselorPage = pathname.startsWith('/konselor');
+    const href = isCounselorPage ? '/konselor' : '/home';
+
     return (
         // header
         <div className="m-0 p-4 w-screen flex justify-between items-center bg-sky-600">
@@ -12,7 +17,7 @@ export default function Navbar({ toggleSidebar, isSidebarOpen }) {
                 <div onClick={toggleSidebar} className="size-8 cursor-pointer text-sky-50 dark:text-sky-50">
                     { isSidebarOpen ? <XMarkIcon/> : <Bars3Icon/> }
                 </div>
-                <Link href="/home" className="flex gap-3 text-sm/6 text-sky-50 dark:text-sky-50 border-none outline-none shadow-none focus:outline-none">
+                <Link href={href} className="flex gap-3 text-sm/6 text-sky-50 dark:text-sky-50 border-none outline-none shadow-none focus:outline-none">
                     <img src="/icon.png" alt="" className="w-24 h-auto"></img>
                     <Path />
                 </Link>

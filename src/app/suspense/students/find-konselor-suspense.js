@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useRouter } from "next/navigation";
 import { getStudentId } from "@/app/utils/auth/auth";
 import Back from "../../components/back";
+import { format } from "date-fns"
 
 export default function FindConselor() {
   const router = useRouter();
@@ -49,7 +50,8 @@ export default function FindConselor() {
 
         // Melampirkan Konselor yang cocok dengan Jadwal
         const combined = counselorUsers.map(counselor => {
-          const counselorSchedules = allSchedules.filter(
+          const counselorSchedules = allSchedules
+          .filter(
             schedule => schedule.counselor_id === counselor.id
           );
           return {
@@ -87,8 +89,8 @@ export default function FindConselor() {
                 <div className="relative">
                   <div className="aspect-4/4 overflow-hidden rounded-2xl">
                     <img
-                      className="p-16 size-full object-cover rounded-2xl"
-                      src="/profile.png"
+                      className="p-16 size-80 object-cover rounded-2xl"
+                      src={counselor.profile_picture || "/profile.png"} 
                       alt="Profile"
                     />
                   </div>
@@ -112,7 +114,7 @@ export default function FindConselor() {
                           >
                             <div className="grid grid-cols-2 gap-2">
                               <span className="font-medium text-black dark:text-white">Jadwal Konselor:</span>
-                              <span className="text-end text-black dark:text-white">{item.date}</span>
+                              <span className="text-end text-black dark:text-white">{new Date(item.date).toLocaleDateString()}</span>
                             </div>
                           </div>
                           <div className="py-3 border-t border-gray-200 dark:border-neutral-700">

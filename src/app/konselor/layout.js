@@ -4,6 +4,7 @@ import KonselorSidebar from "../components/konselor-sidebar"
 import Navbar from "../components/navbar"
 import { useState } from "react"
 import localFont from "next/font/local"
+import LoadingIndicator from "../components/loading"
 
 const rubik = localFont({
     src: [
@@ -40,6 +41,7 @@ export default function RootLayout({ children }){
     return (
         <div className={`${rubik.className} font-sans h-screen flex flex-col bg-sky-50 dark:bg-gray-900 overflow-hidden`}>
             {/* header */}
+            <LoadingIndicator />
             <Navbar toggleSidebar={toggleSidebar} />
             <div className="h-screen flex flex-row">
                 {/* sidebar */}

@@ -18,6 +18,7 @@ export default function BookingHome() {
     router.push(`/home/bookings/create-booking?student_id=${studentId}&schedule_id=${scheduleId}&counselor_id=${counselor_id}`);
   };
   const redirectToSuccessBooking = () => router.push('/konselor/bookings/confirm-booking');
+  const refreshBooking = () => router.push('/konselor/bookings/rejected-booking');
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -53,7 +54,6 @@ export default function BookingHome() {
         const users = usersRes.data || [];
         const allBookings = bookingsRes.data || [];
         const pendingBookings = allBookings.filter(b => b.status === 'pending');
-
 
         const combinedData = pendingBookings.map(booking => {
           const user = users.find(u => u.id === booking.student_id);
@@ -96,6 +96,7 @@ export default function BookingHome() {
           redirectToSuccessBooking();
         } else if (status === 'rejected') {
           setRejectedMessage('Konsultasi Ditolak!');
+          refreshBooking();
         }
 
         setShowDone(true);
@@ -110,9 +111,9 @@ export default function BookingHome() {
   if (!isClient) return null;
 
   return (
-    <div className="flex-1 h-screen bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
-      <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4">List Bookings</h1>
+    <div className="flex-1 h-screen overflow-y-scroll bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
+      <div className="p-6 pb-32">
+        <h1 className="text-2xl font-bold mb-4">Daftar Booking</h1>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {bookings.map((booking) => (
             <div
@@ -122,13 +123,13 @@ export default function BookingHome() {
               <div className="h-52 flex justify-center items-center bg-gray-600 rounded-t-xl">
                 <img
                   className="size-full object-cover rounded-2xl"
-                  src="/profile/profile-2.jpg"
+                  src={booking.user?.profile_picture || "/profile.png"}
                   alt="Profile"
                 />
               </div>
               <div className="p-4 md:p-6">
                 <span className="block mb-1 text-xs font-semibold uppercase text-blue-600 dark:text-blue-500">
-                  Booking Request
+                  Permintaan Booking
                 </span>
                 <h3 className="text-xl font-semibold text-gray-800 dark:text-neutral-300 dark:hover:text-white">
                   {booking.user?.username || 'Unknown User'}

@@ -20,6 +20,7 @@ export default function CreateBooking() {
 
     const redirectToSuccessBooking = () => {
         router.push(`/home/chat/chat-pelajar/?counselor_id=${counselorId}`);
+        // router.push("/home/chat/booking/success-booking")
     };
 
     const handleSelect = () => {
@@ -57,7 +58,7 @@ export default function CreateBooking() {
                 },
             });
 
-            if (bookingsRes.status === 200) {
+            if (bookingsRes.status === 200 || bookingsRes.status === 201) {
                 setState((prevState) => ({
                     ...prevState,
                     successMessage: "Bookings successful. Redirecting to Order-History...",

@@ -6,6 +6,7 @@ import { io } from "socket.io-client";
 import { getStudentId } from "@/app/utils/auth/auth";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
+// import { searchParams, useSearchParams } from "next/navigation";
 
 export default function Chat() {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,9 @@ export default function Chat() {
     const senderId = getStudentId();
     const [error, setError] = useState("");
     const sessionId = `session-${roomId}`;
-    const [userLogin, setUserLogin] = useState([]);
+    // const [userLogin, setUserLogin] = useState([]);
+    // const searchParams = useSearchParams();
+    // const counselorId = searchParams.get('counselor_id');
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
@@ -29,7 +32,8 @@ export default function Chat() {
     const router = useRouter();
 
     const handleSelect = (schedule_id, counselor_id) => {
-        router.push(`/konselor/hasil-assessment?student_id=${senderId}`);
+        // router.push(`/konselor/hasil-assessment?student_id=${senderId}`);
+        router.push(`/home/chat/chat-pelajar?student_id=${senderId}`)
     };
 
     useEffect(() => {
@@ -60,21 +64,21 @@ export default function Chat() {
         };
     }, [roomId]);
 
-    const fetchData = async () => {
-        try {
-            const usersRes = await axios.get('https://sejiwa.onrender.com/api/users', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
-            const users = usersRes.data || [];
-            const user = users.find(u => u.id === senderId);
-            setUserLogin([user]);
-        } catch (err) {
-            console.error('Error fetching data:', err);
-        }
-    };
+    // const fetchData = async () => {
+    //     try {
+    //         const usersRes = await axios.get('https://sejiwa.onrender.com/api/users', {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`,
+    //                 'Content-Type': 'application/json',
+    //             },
+    //         });
+    //         const users = usersRes.data || [];
+    //         const user = users.find(u => u.id === senderId);
+    //         setUserLogin([user]);
+    //     } catch (err) {
+    //         console.error('Error fetching data:', err);
+    //     }
+    // };
 
     const handleCreateRoom = async (e) => {
         if (!token) return;
@@ -130,7 +134,7 @@ export default function Chat() {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
-    fetchData();
+    // fetchData();
 
     return (
         <div className="text-gray-900 dark:text-sky-50 p-8 pr-22 sm:pr-6 w-full mx-auto">
