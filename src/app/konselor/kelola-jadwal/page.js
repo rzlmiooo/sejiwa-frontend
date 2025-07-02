@@ -134,7 +134,7 @@ export default function KelolaJadwal() {
                                     Schedule Request
                                 </span>
                                 <h3 className="text-xl font-semibold text-gray-800 dark:text-neutral-300 dark:hover:text-white">
-                                    {s.date}
+                                    {new Date(s.date).toLocaleDateString()}
                                 </h3>
                                 <p className="mt-3 text-gray-500 dark:text-neutral-500">
                                     {s.time}
