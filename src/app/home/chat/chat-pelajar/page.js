@@ -33,7 +33,7 @@ export default function Chat() {
 
     const handleSelect = () => {
         // router.push(`/konselor/hasil-assessment?student_id=${senderId}`);
-        router.push(`/home/chat/chat-pelajar?student_id=${senderId}`)/
+        router.push(`/home/chat/chat-pelajar?student_id=${senderId}`);
     };
 
     useEffect(() => {
