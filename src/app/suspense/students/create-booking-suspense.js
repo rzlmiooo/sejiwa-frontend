@@ -23,9 +23,6 @@ export default function CreateBooking() {
         // router.push("/home/chat/booking/success-booking")
     };
 
-    const handleSelect = () => {
-    };
-
     const [formData, setFormData] = useState({
         student_id: studentId,
         schedule_id: scheduleId,
@@ -35,9 +32,7 @@ export default function CreateBooking() {
         errorMessage: null
     });
 
-    const [state, setState] = useState({
-
-    });
+    const [state, setState] = useState("");
 
     const handleSubmitClick = async (e) => {
         if (!token) return;
@@ -61,14 +56,14 @@ export default function CreateBooking() {
             if (bookingsRes.status === 200 || bookingsRes.status === 201) {
                 setState((prevState) => ({
                     ...prevState,
-                    successMessage: "Bookings successful. Redirecting to Order-History...",
+                    successMessage: "Booking sukses. Redirecting ke halaman Chat...",
                     errorMessage: null,
                 }));
                 redirectToSuccessBooking();
             } else {
                 setState((prev) => ({
                     ...prev,
-                    errorMessage: "Unexpected server response.",
+                    errorMessage: "Koneksi Buruk.",
                 }));
             }
             return redirectToSuccessBooking();
@@ -76,7 +71,7 @@ export default function CreateBooking() {
             console.error("Booking request failed:", error);
             setState((prev) => ({
                 ...prev,
-                errorMessage: "Booking failed. Please try again later.",
+                errorMessage: "Booking gagal. Cek koneksi internet Anda.",
             }));
         }
     };
@@ -95,31 +90,17 @@ export default function CreateBooking() {
                                 </h2>
                             </div>
 
-                            {/* <input
-                                type="hidden"
-                                name="studentId"
-                                value={studentId}
-                                readOnly
-                            />
-
-                            <input
-                                type="hidden"
-                                name="scheduleId"
-                                value={scheduleId}
-                                readOnly
-                            /> */}
-
                         </div>
 
                         <div class="py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
                             <h2 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                                Submit application
+                                Penting!
                             </h2>
                             <p class="mt-3 text-sm text-gray-600 dark:text-neutral-400">
-                                In order to contact you with future jobs that you may be interested in, we need to store your personal data.
+                                Respon yang Anda kirimkan akan kami gunakan untuk pengembangan Sejiwa App kedepannya. 
                             </p>
                             <p class="mt-2 text-sm text-gray-600 dark:text-neutral-400">
-                                If you are happy for us to do so please click the checkbox below.
+                                Setuju / Tidak
                             </p>
 
                             <div class="mt-5 flex">
@@ -133,7 +114,7 @@ export default function CreateBooking() {
                             class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                             onClick={handleSubmitClick}
                         >
-                            Booking
+                            Book
                         </button>
                     </form>
                 </div>

@@ -102,8 +102,8 @@ export default function Chat() {
             if (res.status === 201 || res.status === 200) {
                 const newRoomId = res.data.id;
                 console.log('New Room ID:', newRoomId);
-                handleSelect();
                 setRoomId(newRoomId);
+                handleSelect();
             } else {
                 console.error('Failed to create room:', res.status);
             }

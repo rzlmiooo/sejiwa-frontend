@@ -7,7 +7,8 @@ import { getStudentId } from "@/app/utils/auth/auth";
 
 export default function HasilAssessment() {
     const searchParams = useSearchParams();
-    const studentId = getStudentId();
+    const studentId = searchParams.get('student_id');
+    const userId = getStudentId();
     const [roomCodes, setRoomCodes] = useState([]); 
     const [assessmentAnswers, setAssessmentAnswers] = useState([]); 
     const [loading, setLoading] = useState(true);
@@ -50,7 +51,7 @@ export default function HasilAssessment() {
                 });
                 const allRooms = roomsRes.data || [];
                 const filteredRooms = allRooms.filter(
-                    (room) => String(room.student_id) === String(studentId)
+                    (room) => String(room.student_id) === String(userId)
                 );
                 setRoomCodes(filteredRooms);
 
@@ -152,50 +153,6 @@ export default function HasilAssessment() {
                             <p className="mt-4 text-gray-600 dark:text-gray-300">No rooms found for this student.</p>
                         )}
 
-                        {assessmentAnswers.length > 0 && (
-                            <>
-                                <h3 className="text-xl font-semibold mt-8 mb-4 dark:text-white">Assessment Answers for this Student:</h3>
-                                <div className="flow-root sm:mt-8">
-                                    <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                                        {assessmentAnswers.map((answer) => (
-                                            <div key={answer.id} className="flex flex-wrap items-center gap-y-4 py-6">
-                                                <dl className="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                                                    <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Answer ID:</dt>
-                                                    <dd className="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-                                                        <a href="#" className="hover:underline">{answer.id}</a>
-                                                    </dd>
-                                                </dl>
-                                                <dl className="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                                                    <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Emosi:</dt>
-                                                    <dd className="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{answer.code}</dd>
-                                                </dl>
-                                                <dl className="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                                                    <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Waktu Pembuatan:</dt>
-                                                    <dd className="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{new Date(answer.submitted_at).toLocaleString()}</dd>
-                                                </dl>
-                                                <dl className="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                                                    <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Status:</dt>
-                                                    <dd className="me-2 mt-1.5 inline-flex items-center rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
-                                                        <svg className="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 11.917 9.724 16.5 19 7.5" />
-                                                        </svg>
-                                                        Confirmed
-                                                    </dd>
-                                                </dl>
-                                                <div className="w-full grid sm:grid-cols-2 lg:flex lg:w-64 lg:items-center lg:justify-end gap-4">
-                                                    <button type="button" className="w-full rounded-lg border border-red-700 px-3 py-2 text-center text-sm font-medium text-red-700 hover:bg-red-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 dark:border-red-500 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900 lg:w-auto">Cancel order</button>
-                                                    <a href="#" className="w-full inline-flex justify-center rounded-lg  border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 lg:w-auto">View details</a>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </>
-                        )}
-                        {assessmentAnswers.length === 0 && !loading && (
-                            <p className="mt-4 text-gray-600 dark:text-gray-300">No assessment answers found for this student.</p>
-                        )}
-
                         <div className="mt-6 mb-10 flex items-center justify-center sm:mt-8" aria-label="Page navigation">
                         <ul className="flex h-8 items-center -space-x-px text-sm">
                             {/* Prev Button */}
@@ -243,6 +200,52 @@ export default function HasilAssessment() {
                             </li>
                         </ul>
                         </div>
+
+                        {assessmentAnswers.length > 0 && (
+                            <>
+                                <h3 className="text-xl font-semibold mt-8 mb-4 dark:text-white">Assessment Answers for this Student:</h3>
+                                <div className="flow-root sm:mt-8">
+                                    <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                                        {assessmentAnswers.map((answer) => (
+                                            <div key={answer.id} className="flex flex-wrap items-center gap-y-4 py-6">
+                                                <dl className="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
+                                                    <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Answer ID:</dt>
+                                                    <dd className="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
+                                                        <a href="#" className="hover:underline">{answer.id}</a>
+                                                    </dd>
+                                                </dl>
+                                                <dl className="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
+                                                    <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Emosi:</dt>
+                                                    <dd className="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{answer.code}</dd>
+                                                </dl>
+                                                <dl className="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
+                                                    <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Waktu Pembuatan:</dt>
+                                                    <dd className="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{new Date(answer.submitted_at).toLocaleString()}</dd>
+                                                </dl>
+                                                <dl className="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
+                                                    <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Status:</dt>
+                                                    <dd className="me-2 mt-1.5 inline-flex items-center rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
+                                                        <svg className="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                                                        </svg>
+                                                        Confirmed
+                                                    </dd>
+                                                </dl>
+                                                <div className="w-full grid sm:grid-cols-2 lg:flex lg:w-64 lg:items-center lg:justify-end gap-4">
+                                                    <button type="button" className="w-full rounded-lg border border-red-700 px-3 py-2 text-center text-sm font-medium text-red-700 hover:bg-red-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 dark:border-red-500 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900 lg:w-auto">Cancel order</button>
+                                                    <a href="#" className="w-full inline-flex justify-center rounded-lg  border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 lg:w-auto">View details</a>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                        {assessmentAnswers.length === 0 && !loading && (
+                            <p className="mt-4 text-gray-600 dark:text-gray-300">No assessment answers found for this student.</p>
+                        )}
+
+
 
                     </div>
                 </div>
