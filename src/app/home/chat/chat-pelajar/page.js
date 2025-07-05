@@ -6,6 +6,7 @@ import { io } from "socket.io-client";
 import { getStudentId } from "@/app/utils/auth/auth";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 export default function Chat() {
     const [isOpen, setIsOpen] = useState(false);
