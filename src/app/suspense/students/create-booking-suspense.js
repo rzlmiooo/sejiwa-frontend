@@ -19,7 +19,7 @@ export default function CreateBooking() {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     const redirectToSuccessBooking = () => {
-        router.push(`/home/chat/chat-pelajar/?counselor_id=${counselorId}`);
+        router.push(`/home/chat/chat-pelajar/?student_id=${studentId}`);
         // router.push("/home/chat/booking/success-booking")
     };
 

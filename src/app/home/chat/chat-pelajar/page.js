@@ -31,9 +31,9 @@ export default function Chat() {
 
     const router = useRouter();
 
-    const handleSelect = (schedule_id, counselor_id) => {
+    const handleSelect = () => {
         // router.push(`/konselor/hasil-assessment?student_id=${senderId}`);
-        router.push(`/home/chat/chat-pelajar?student_id=${senderId}`)
+        router.push(`/home/chat/chat-pelajar?student_id=${senderId}`)/
     };
 
     useEffect(() => {
