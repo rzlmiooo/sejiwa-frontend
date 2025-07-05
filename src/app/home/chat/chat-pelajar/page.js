@@ -21,7 +21,7 @@ export default function Chat() {
     const senderId = getStudentId();
     const [error, setError] = useState("");
     const sessionId = `session-${roomId}`;
-
+    
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     const socketRef = useRef(null);
@@ -35,10 +35,7 @@ export default function Chat() {
     useEffect(() => {
         const storedRoomId = localStorage.getItem("activeRoomId");
         if (storedRoomId) {
-          setRoomId(storedRoomId);
-      
-          // Emit join room socket
-          socketRef.current?.emit("join", { roomId: storedRoomId });
+          setRoomId(String(storedRoomId).trim());
         } else {
           console.warn("Room ID kosong di localStorage");
         }
@@ -59,6 +56,7 @@ export default function Chat() {
 
         socketRef.current.on("connect", () => {
             console.log("Connected:", socketRef.current.id);
+            socketRef.current.emit("join", { roomId });
         });
 
         socketRef.current.on("chat-message", (data) => {
@@ -66,12 +64,13 @@ export default function Chat() {
             setMessages((prev) => [...prev, data]);
         });
 
+        
         return () => {
             socketRef.current?.disconnect();
             socketRef.current = null;
         };
     }, [roomId]);
-
+    
     const handleCreateRoom = async (e) => {
         if (!token) return;
 
@@ -92,7 +91,7 @@ export default function Chat() {
             console.log('POST response:', res.data);
 
             if (res.status === 201 || res.status === 200) {
-                const newRoomId = res.data.id;
+                const newRoomId = String(res.data.id).trim();
                 console.log('New Room ID:', newRoomId);
                 localStorage.setItem("activeRoomId", newRoomId);
                 setRoomId(newRoomId);
