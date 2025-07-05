@@ -13,11 +13,12 @@ export default function BookingHome() {
   const [bookings, setBookings] = useState([]);
   const [isClient, setIsClient] = useState(false);
   const [token, setToken] = useState(null);
+  const studentId = searchParams.get('student_id');
 
   const handleSelect = (scheduleId, counselor_id) => {
     router.push(`/home/bookings/create-booking?student_id=${studentId}&schedule_id=${scheduleId}&counselor_id=${counselor_id}`);
   };
-  const redirectToSuccessBooking = () => router.push('/konselor/bookings/confirm-booking');
+  const redirectToSuccessBooking = () => router.push(`/konselor/chat-konselor`);
   const refreshBooking = () => router.push('/konselor/bookings/rejected-booking');
 
   useEffect(() => {
@@ -63,6 +64,9 @@ export default function BookingHome() {
           };
         });
 
+        console.log("iki booking: ")
+        console.log(combinedData);
+
         setBookings(combinedData);
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -90,19 +94,39 @@ export default function BookingHome() {
         },
       });
 
-      if (res.status === 200) {
-        if (status === 'confirm') {
-          setDoneMessage('Konsultasi Diterima!');
-          redirectToSuccessBooking();
-        } else if (status === 'rejected') {
-          setRejectedMessage('Konsultasi Ditolak!');
-          refreshBooking();
-        }
-
-        setShowDone(true);
+      const roomRes = await axios.get("https://sejiwa.onrender.com/api/chats/rooms", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+  
+      const rooms = roomRes.data;
+      const lastRoom = rooms.at(-1);
+  
+      if (lastRoom?.id && res.status === 200 || res.status === 201) {
+        localStorage.setItem("activeRoomId", lastRoom.id);
+        setDoneMessage('Konsultasi Diterima!');
+        redirectToSuccessBooking();
+      } else if (status === 'rejected') {
+        setRejectedMessage('Konsultasi Ditolak!');
+        refreshBooking();
       } else {
         console.error('Unexpected server response.');
       }
+
+      // if (res.status === 200 || res.status === 201) {
+      //   if (status === 'confirm') {
+      //     setDoneMessage('Konsultasi Diterima!');
+      //     redirectToSuccessBooking(bookings.student_id);
+      //   } else if (status === 'rejected') {
+      //     setRejectedMessage('Konsultasi Ditolak!');
+      //     refreshBooking();
+      //   }
+
+      //   setShowDone(true);
+      // } else {
+      //   console.error('Unexpected server response.');
+      // }
     } catch (err) {
       console.error('Booking request failed:', err);
     }
@@ -168,13 +192,6 @@ export default function BookingHome() {
                     </span>
                   </div>
                 )}
-                {/* <button
-                  type="button"
-                  className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-8 py-2.5 text-center m-2"
-                  onClick={redirectToConsultations(booking.student_id)}
-                >
-                  Chat
-                </button> */}
               </div>
             </div>
           ))}

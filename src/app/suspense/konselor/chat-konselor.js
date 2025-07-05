@@ -6,6 +6,7 @@ import { io } from "socket.io-client";
 import { getStudentId } from "../../utils/auth/auth";
 import { useSearchParams } from 'next/navigation';
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 export default function ChatKonselor() {
     const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +26,15 @@ export default function ChatKonselor() {
     const [loading, setLoading] = useState(false);
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     const socketRef = useRef(null);
+
+    useEffect(() => {
+        const stored = localStorage.getItem("activeRoomId");
+        if (stored) {
+          setRoomId(stored);
+        } else {
+          console.log("Room ID tidak ditemukan.");
+        }
+      }, []);
 
     useEffect(() => {
         if (!roomId || socketRef.current) return;
@@ -55,6 +65,7 @@ export default function ChatKonselor() {
         return () => {
             socketRef.current?.disconnect();
             socketRef.current = null;
+            localStorage.removeItem("activeRoomId");
         };
     }, [roomId]);
 
@@ -64,6 +75,13 @@ export default function ChatKonselor() {
             setRoomId(inputRoomId.trim());
         }
     };
+    
+    const handleExit = () => {
+        localStorage.removeItem("activeRoomId");
+        window.location.href = "/konselor/chat-konselor"; // ganti sesuai path lo
+    };
+    
+    console.log(roomCode)
 
     const sendMessage = () => {
         if (message.trim() && socketRef.current) {
@@ -93,8 +111,10 @@ export default function ChatKonselor() {
                 const allRooms = roomsRes.data || [];
 
                 const roomUser = allRooms.filter(
-                    (room) => String(room.student_id) === String(studentId)
+                    (room) => room.student_id === senderId
                 );
+                
+                console.log(roomUser);
 
                 setRoomJoin(roomUser);
             } catch (err) {
@@ -107,8 +127,6 @@ export default function ChatKonselor() {
         fetchRoomUser();
     }, [token, studentId]);
 
-
-
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
@@ -119,13 +137,12 @@ export default function ChatKonselor() {
             <div className="flex gap-2 text-xs text-gray-900 dark:text-sky-50">
                 Room ID tersedia:
                 {roomCode?.length > 0 ? (
-                    roomCode.map((room) => (
-                        <h2 key={room.id}>{room.id},</h2>
-                    ))
-                ) : (
+                    <h2>{roomCode[roomCode.length - 1].id}</h2>
+                    ) : (
                     <p>No rooms found.</p>
                 )}
             </div>
+            
             {!roomId && (
                 <>
                     <div className="my-5">
@@ -144,6 +161,13 @@ export default function ChatKonselor() {
 
             {roomId && (
                 <>
+                <button
+                onClick={handleExit}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-500 text-sky-50 rounded-xl transition"
+            >
+                <ArrowLeftIcon className="w-4 h-4" />
+                <span>Kembali</span>
+                </button>
                 <h2 className="text-lg font-bold mt-4 mb-4">
                     Room ID: <strong>{roomId}</strong> — <span className="font-light">ingat Room ID ini agar bisa melanjutkan kembali Chat dengan Pelajar yang sama.</span>
                 </h2>
