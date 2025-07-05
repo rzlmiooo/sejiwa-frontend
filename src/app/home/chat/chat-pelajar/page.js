@@ -37,6 +37,18 @@ export default function Chat() {
     };
 
     useEffect(() => {
+        const storedRoomId = localStorage.getItem("activeRoomId");
+        if (storedRoomId) {
+          setRoomId(storedRoomId);
+      
+          // Emit join room socket
+          socketRef.current?.emit("join", { roomId: storedRoomId });
+        } else {
+          console.warn("Room ID kosong di localStorage");
+        }
+    }, []);
+
+    useEffect(() => {
         if (!roomId || socketRef.current) return;
 
         socketRef.current = io("https://sejiwa.onrender.com", {
@@ -64,22 +76,6 @@ export default function Chat() {
         };
     }, [roomId]);
 
-    // const fetchData = async () => {
-    //     try {
-    //         const usersRes = await axios.get('https://sejiwa.onrender.com/api/users', {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 'Content-Type': 'application/json',
-    //             },
-    //         });
-    //         const users = usersRes.data || [];
-    //         const user = users.find(u => u.id === senderId);
-    //         setUserLogin([user]);
-    //     } catch (err) {
-    //         console.error('Error fetching data:', err);
-    //     }
-    // };
-
     const handleCreateRoom = async (e) => {
         if (!token) return;
 
@@ -102,6 +98,7 @@ export default function Chat() {
             if (res.status === 201 || res.status === 200) {
                 const newRoomId = res.data.id;
                 console.log('New Room ID:', newRoomId);
+                localStorage.setItem("activeRoomId", newRoomId);
                 setRoomId(newRoomId);
                 handleSelect();
             } else {
