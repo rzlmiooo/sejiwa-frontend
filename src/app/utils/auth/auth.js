@@ -6,7 +6,7 @@ export function getStudentId() {
 
   try {
     const decoded = JSON.parse(atob(token.split('.')[1]));
-    return decoded?.id || null;
+    return decoded?.id || decoded?.role || null;
   } catch (error) {
     console.error('Failed to decode token:', error);
     return null;

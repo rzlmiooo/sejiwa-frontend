@@ -6,7 +6,6 @@ import { io } from "socket.io-client";
 import { getStudentId } from "@/app/utils/auth/auth";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
-// import { searchParams, useSearchParams } from "next/navigation";
 
 export default function Chat() {
     const [isOpen, setIsOpen] = useState(false);
@@ -21,9 +20,6 @@ export default function Chat() {
     const senderId = getStudentId();
     const [error, setError] = useState("");
     const sessionId = `session-${roomId}`;
-    // const [userLogin, setUserLogin] = useState([]);
-    // const searchParams = useSearchParams();
-    // const counselorId = searchParams.get('counselor_id');
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
@@ -32,7 +28,6 @@ export default function Chat() {
     const router = useRouter();
 
     const handleSelect = () => {
-        // router.push(`/konselor/hasil-assessment?student_id=${senderId}`);
         router.push(`/home/chat/chat-pelajar`);
     };
 
@@ -114,6 +109,11 @@ export default function Chat() {
         }
     };
 
+    const handleExit = () => {
+        localStorage.removeItem("activeRoomId");
+        window.location.href = "/home/chat/chat-pelajar";
+    };
+
     const sendMessage = () => {
         if (message.trim() && socketRef.current) {
             console.log("Sending message:", message);
@@ -130,8 +130,6 @@ export default function Chat() {
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
-
-    // fetchData();
 
     return (
         <div className="text-gray-900 dark:text-sky-50 p-8 pr-22 sm:pr-6 w-full mx-auto">
@@ -170,6 +168,13 @@ export default function Chat() {
             )}
             {roomId && (
                 <>
+                <button
+                onClick={handleExit}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-500 text-sky-50 rounded-xl transition"
+            >
+                <ArrowLeftIcon className="w-4 h-4" />
+                <span>Kembali</span>
+                </button>
                 <h2 className="text-lg font-bold mt-4 mb-4">
                     Room ID: <strong>{roomId}</strong> — <span className="font-light">ingat Room ID ini agar bisa melanjutkan kembali chat dengan Konselor yang sama.</span>
                 </h2>
