@@ -11,36 +11,77 @@ export default function Recommendation() {
   const [medium, setMedium] = useState([]);
   const [high, setHigh] = useState([]);
   const [loading, setLoading] = useState(true);
+  const studentId = getStudentId();
+
 
   useEffect(() => {
     const fetchData = async () => {
       const encodedAnswers = searchParams.get('answers');
-      if (!encodedAnswers) return;
+      if (!encodedAnswers) {
+        setLoading(false);
+        return;
+      }
 
-      try {
-        const answers = JSON.parse(decodeURIComponent(encodedAnswers));
-        const intensity = answers[0]?.intensity;
+      try{
 
-         const saveRes = await axios.post('https://sejiwa.onrender.com/api/assessment/answer', {
-          answers: answers,
-        });
+      const answers = JSON.parse(decodeURIComponent(encodedAnswers));
+      
+      const cleanedAnswers = answers.map(ans => ({
+          ...ans,
+          code: ans.code.trim(),
+          intensity: ans.intensity.trim().toLowerCase() 
+      }));
+
+      const desiredRecommendationTypes = new Set();
+
+      cleanedAnswers.forEach(answer => {
+          if (answer.intensity === "low") {
+            desiredRecommendationTypes.add('poster');
+          } else if (answer.intensity === "medium") {
+            desiredRecommendationTypes.add('artikel');
+          } else if (answer.intensity === "high") {
+            desiredRecommendationTypes.add('video');
+          }
+      });
+
+      const payloadForAssessment = {
+          student_id: studentId,
+          question_code: cleanedAnswers[0]?.code,
+          submitted_at: new Date(),
+      };
+
+
+        await axios.post('https://sejiwa.onrender.com/api/assessment/answer', payloadForAssessment );
 
         const res = await axios.post('https://sejiwa.onrender.com/api/assessment/submit', {
-          answers: answers,
+          answers: cleanedAnswers,
         });
 
-        const recommendations = res.data.recommendations.map((r) => ({
+        const allRecommendations = res.data.recommendations.map((r) => ({
           ...r,
           type: r.type.trim().toLowerCase(),
         }));
 
-        if (intensity === "low") {
-          setLow(recommendations.filter(r => r.type === 'poster'));
-        } else if (intensity === "medium") {
-          setMedium(recommendations.filter(r => r.type === 'artikel'));
-        } else if (intensity === "high") {
-          setHigh(recommendations.filter(r => r.type === 'video'));
-        }
+        const filteredLow = [];
+        const filteredMedium = [];
+        const filteredHigh = [];
+
+        allRecommendations.forEach(recommendation => {
+          if (desiredRecommendationTypes.has(recommendation.type)) {
+            if (recommendation.type === 'poster') {
+              filteredLow.push(recommendation);
+            } else if (recommendation.type === 'artikel') {
+              filteredMedium.push(recommendation);
+            } else if (recommendation.type === 'video') {
+              filteredHigh.push(recommendation);
+            }
+          }
+        });
+
+        setLow(filteredLow);
+        setMedium(filteredMedium);
+        setHigh(filteredHigh);
+
       } catch (err) {
         console.error('Error fetching recommendations:', err);
       } finally {
@@ -49,7 +90,7 @@ export default function Recommendation() {
     };
 
     fetchData();
-  }, [searchParams]);
+  }, [searchParams , studentId]);
 
   if (loading) return (
     <div className="m-auto flex flex-col justify-center items-center gap-4">
