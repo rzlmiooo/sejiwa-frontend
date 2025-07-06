@@ -14,6 +14,67 @@ export default function Ass() {
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
+    // useEffect(() => {
+    //     if (!token) return;
+
+    //     const fetchQuestions = async () => {
+    //         try {
+    //             const res = await axios.get('https://sejiwa.onrender.com/api/assessment/questions', {
+    //                 headers: {
+    //                     Authorization: `Bearer ${token}`,
+    //                     'Content-Type': 'application/json',
+    //                 },
+    //             });
+    //             setQuestions(res.data);
+    //         } catch (err) {
+    //             console.error('Error fetching questions', err);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+    //     fetchQuestions();
+    // }, []);
+
+    // const handleChange = (id, field, value) => {
+    //     setAnswers(prev => ({
+    //         ...prev,
+    //         [id]: {
+    //             ...prev[id],
+    //             [field]: value,
+    //         },
+    //     }));
+    // };
+
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const validQuestionIds = questions.map(q => q.id);
+    //     const submitted = {
+    //         answers: Object.entries(answers)
+    //             .filter(([id, val]) => val.checked)
+    //             .map(([id, val]) => {
+    //                 const question = questions.find(q => q.id === Number(id));
+    //                 return {
+    //                     code: question?.code,
+    //                     intensity: val.intensity,
+    //                 };
+    //             })
+    //     };
+    //     try {
+    //         console.log('Submitted Payload:', submitted);
+
+    //         await axios.post('https://sejiwa.onrender.com/api/assessment/submit', submitted);
+            
+    //         const query = encodeURIComponent(JSON.stringify(submitted.answers));
+    //         router.push(`/home/recommendation?answers=${query}`);
+    //     } catch (err) {
+    //         console.error('Submission error', err);
+    //         alert('Failed to submit.');
+    //     }
+    // };
+
+    // if (loading) return <p>Loading questions...</p>;
+
     useEffect(() => {
         if (!token) return;
 
@@ -49,15 +110,6 @@ export default function Ass() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const validQuestionIds = questions.map(q => q.id);
-        // const submitted = {
-        //     answers: Object.entries(answers)
-        //         .filter(([id, val]) => val.checked)
-        //         .map(([id]) => {
-        //             const question = questions.find(q => q.id === Number(id));
-        //             return question?.code;
-        //         })
-        //         .filter(Boolean) 
-        // };
         const submitted = {
             answers: Object.entries(answers)
                 .filter(([id, val]) => val.checked)
@@ -69,11 +121,12 @@ export default function Ass() {
                     };
                 })
         };
+
         try {
             console.log('Submitted Payload:', submitted);
 
             await axios.post('https://sejiwa.onrender.com/api/assessment/submit', submitted);
-            
+
             const query = encodeURIComponent(JSON.stringify(submitted.answers));
             router.push(`/home/recommendation?answers=${query}`);
         } catch (err) {
