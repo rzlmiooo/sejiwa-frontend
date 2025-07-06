@@ -115,7 +115,7 @@ export default function Chat() {
     };
 
     const sendMessage = () => {
-        if (!socketRef.current || !socketRef.current.connected) {
+        if (!socketRef.current || !socketRef.current.on) {
             console.warn("Socket belum connect!");
             alert("⚠️ Koneksi belum siap. Coba lagi setelah sinyal stabil.");
             return;
