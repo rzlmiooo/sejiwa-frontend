@@ -74,6 +74,9 @@ export default function BookingHome() {
     };
 
     fetchData();
+    const interval = setInterval(fetchData, 10000);
+
+    return () => clearInterval(interval);
   }, [token, searchParams]);
 
   const handleSubmit = async (bookingId, studentId, scheduleId, status) => {

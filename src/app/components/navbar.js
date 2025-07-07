@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import UserGreeting from '../components/greetings'
 import UserProfile from './foto'
 import { usePathname } from 'next/navigation'
+import NotificationBell from './notificationBell'
 
 export default function Navbar({ toggleSidebar, isSidebarOpen }) {
     const pathname = usePathname();
@@ -22,10 +23,13 @@ export default function Navbar({ toggleSidebar, isSidebarOpen }) {
                     <Path />
                 </Link>
             </div>
-            <Link href="/home/settings/profile/" className="flex justify-center items-center gap-3">
-                <h1 className="hidden sm:block font-bold text-sky-50 dark:text-sky-50">Hi, <UserGreeting/></h1>
-                <UserProfile />
-            </Link>
+            <div className="flex justify-center items-center gap-6">
+                <NotificationBell className="mr-10"></NotificationBell>
+                <Link href="/home/settings/profile/" className="flex justify-center items-center gap-3">
+                    <h1 className="hidden sm:block font-bold text-sky-50 dark:text-sky-50">Hi, <UserGreeting/></h1>
+                    <UserProfile />
+                </Link>
+            </div>
         </div>
     )
 }

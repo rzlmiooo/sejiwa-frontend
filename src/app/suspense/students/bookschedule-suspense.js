@@ -3,9 +3,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
+import { getStudentId } from "@/app/utils/auth/auth";
 
 export default function BookingSchedule() {
   const searchParams = useSearchParams();
+  const counselorId = searchParams.get("counselor_id");
+  const studentId = getStudentId();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,8 +26,10 @@ export default function BookingSchedule() {
           },
         });
         const bookings = bookingsRes.data || [];
-
-        return bookings;
+        const filtered = bookings.filter(
+          (b) => String(b.student_id) === String(studentId)
+      );
+        return filtered;
       }
       catch (err) {
         console.error('Error fetching data:', err);
@@ -34,7 +39,7 @@ export default function BookingSchedule() {
     }
     
     fetchData();
-  }, [searchParams]);
+  }, []);
 
   return (
     <div className="flex-1 p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
