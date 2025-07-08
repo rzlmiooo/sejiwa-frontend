@@ -10,6 +10,7 @@ export default function Navbar({ toggleSidebar, isSidebarOpen }) {
     const pathname = usePathname();
     const isCounselorPage = pathname.startsWith('/konselor');
     const href = isCounselorPage ? '/konselor' : '/home';
+    const profile = isCounselorPage ? '/konselor/profile' : '/home/settings/profile'
 
     return (
         // header
@@ -25,7 +26,7 @@ export default function Navbar({ toggleSidebar, isSidebarOpen }) {
             </div>
             <div className="flex justify-center items-center gap-6">
                 <NotificationBell className="mr-10"></NotificationBell>
-                <Link href="/home/settings/profile/" className="flex justify-center items-center gap-3">
+                <Link href={profile} className="flex justify-center items-center gap-3">
                     <h1 className="hidden sm:block font-bold text-sky-50 dark:text-sky-50">Hi, <UserGreeting/></h1>
                     <UserProfile />
                 </Link>
