@@ -119,7 +119,7 @@ export default function Login() {
             <img src="/icon.png" alt="logo" className="h-10 w-auto" />
             <h1 className="text-l text-white">Login</h1>
           </div>
-          <h1 className={`${josefinSlab.className} m-5 text-2xl font-bold`}>
+          <h1 className={`${josefinSlab.className} m-5 text-2xl text-sky-50 font-bold`}>
             Mindfulness, Refleksi diri, dan Keseimbangan Emosional
           </h1>
           <form onSubmit={handleSubmitClick}>
@@ -154,7 +154,7 @@ export default function Login() {
             </button>
           </form>
 
-          <div className="p-5 font-bold">
+          <div className="p-5 font-bold text-sky-50">
             <span>Belum punya akun? </span>
             <span
               className="text-sky-500 underline cursor-pointer"

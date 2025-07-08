@@ -81,7 +81,7 @@ const handleMouseEnter = () => {
         onMouseLeave={handleMouseLeave}
         >
         <div className="cursor-pointer">
-            <BellIcon className="h-7 w-7 text-gray-700 dark:text-white" />
+            <BellIcon className="h-7 w-7 text-sky-50" />
             {count > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                 {count}

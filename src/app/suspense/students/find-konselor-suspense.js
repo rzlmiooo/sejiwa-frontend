@@ -72,7 +72,7 @@ export default function FindConselor() {
 
   if (loading) return <p className="p-4">Loading...</p>;
   return (
-    <div className="flex h-auto bg-gray-100 dark:bg-gray-900 text-black dark:text-white overflow-y-scroll">
+    <div className="flex-1 h-auto bg-gray-100 dark:bg-gray-900 text-black dark:text-white overflow-y-scroll">
       <main className="flex-1 p-6">
         <div className="flex">
           <Back />

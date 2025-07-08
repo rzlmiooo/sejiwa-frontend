@@ -168,7 +168,7 @@ export default function Recommendation() {
         </div>
         <div className="p-6 flex flex-col gap-5">
           Kebingungan? Mari hubungi konselor <br/>untuk penjelasan lebih lanjut
-          <Link href="/home/chat/" className="flex gap-2 justify-center items-center w-40 h-10 rounded-2xl bg-sky-600 hover:bg-sky-500">
+          <Link href="/home/chat/" className="flex gap-2 justify-center items-center w-40 h-10 rounded-2xl text-sky-50 bg-sky-600 hover:bg-sky-500">
             Chat Konselor<ArrowUpRightIcon className="size-4"/>
           </Link>
         </div>

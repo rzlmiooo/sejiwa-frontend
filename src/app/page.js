@@ -168,25 +168,25 @@ export default function LandingPage() {
 
         <div className="relative flex flex-wrap align-center justify-center z-10 m-5 gap-5 md:gap-10">
           <div className="p-5 py-5 w-40 md:w-50 h-80 md:h-80 rounded-2xl bg-sky-200 flex flex-col gap-5 justify-start">
-            <HandThumbUpIcon className="p-1 rounded-xl size-10 bg-sky-500" />
+            <HandThumbUpIcon className="p-1 rounded-xl size-10 text-sky-50 bg-sky-500" />
             <h1 className="text-gray-900">
               Membantu pengguna memahami dan mengelola stres serta kecemasan melalui pendekatan post-modern.
             </h1>
           </div>
           <div className="p-5 py-5 w-40 md:w-50 h-80 md:h-80 rounded-2xl bg-sky-200 flex flex-col gap-5 justify-start">
-            <HandThumbUpIcon className="p-1 rounded-xl size-10 bg-sky-500" />
+            <HandThumbUpIcon className="p-1 rounded-xl size-10 text-sky-50 bg-sky-500" />
             <h1 className="text-gray-900">
               Meningkatkan kesadaran diri dan kesejahteraan emosional melalui latihan reflektif dan praktik relaksasi.
             </h1>
           </div>
           <div className="p-5 py-5 w-40 md:w-50 h-80 md:h-80 rounded-2xl bg-sky-200 flex flex-col gap-5 justify-start">
-            <HandThumbUpIcon className="p-1 rounded-xl size-10 bg-sky-500" />
+            <HandThumbUpIcon className="p-1 rounded-xl size-10 text-sky-50 bg-sky-500" />
             <h1 className="text-gray-900">
               Membantu pengguna memahami dan mengelola stres serta kecemasan melalui pendekatan post-modern.
             </h1>
           </div>
           <div className="p-5 py-5 w-40 md:w-50 h-80 md:h-80 rounded-2xl bg-sky-200 flex flex-col gap-5 justify-start">
-            <HandThumbUpIcon className="p-1 rounded-xl size-10 bg-sky-500" />
+            <HandThumbUpIcon className="p-1 rounded-xl size-10 text-sky-50 bg-sky-500" />
             <h1 className="text-gray-900">
               Meningkatkan kesadaran diri dan kesejahteraan emosional melalui latihan reflektif dan praktik relaksasi.
             </h1>

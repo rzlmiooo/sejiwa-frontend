@@ -56,7 +56,7 @@ export default function Dashboard() {
     if (!isClient) return null;
 
     return (
-        <div className="w-full h-screen">
+        <div className="flex-1 w-full h-screen">
             <main className="flex flex-col gap-4 p-8 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
                 <h1>Halo, <UserGreeting/>. Selamat datang di halaman Konselor</h1>
                 <h1 className="text-2xl font-bold mb-4">Ringkasan Aktivitas Konseling</h1>

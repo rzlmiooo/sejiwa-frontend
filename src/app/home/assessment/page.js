@@ -13,68 +13,7 @@ export default function Ass() {
     const router = useRouter();
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-
-    // useEffect(() => {
-    //     if (!token) return;
-
-    //     const fetchQuestions = async () => {
-    //         try {
-    //             const res = await axios.get('https://sejiwa.onrender.com/api/assessment/questions', {
-    //                 headers: {
-    //                     Authorization: `Bearer ${token}`,
-    //                     'Content-Type': 'application/json',
-    //                 },
-    //             });
-    //             setQuestions(res.data);
-    //         } catch (err) {
-    //             console.error('Error fetching questions', err);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-    //     fetchQuestions();
-    // }, []);
-
-    // const handleChange = (id, field, value) => {
-    //     setAnswers(prev => ({
-    //         ...prev,
-    //         [id]: {
-    //             ...prev[id],
-    //             [field]: value,
-    //         },
-    //     }));
-    // };
-
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const validQuestionIds = questions.map(q => q.id);
-    //     const submitted = {
-    //         answers: Object.entries(answers)
-    //             .filter(([id, val]) => val.checked)
-    //             .map(([id, val]) => {
-    //                 const question = questions.find(q => q.id === Number(id));
-    //                 return {
-    //                     code: question?.code,
-    //                     intensity: val.intensity,
-    //                 };
-    //             })
-    //     };
-    //     try {
-    //         console.log('Submitted Payload:', submitted);
-
-    //         await axios.post('https://sejiwa.onrender.com/api/assessment/submit', submitted);
-            
-    //         const query = encodeURIComponent(JSON.stringify(submitted.answers));
-    //         router.push(`/home/recommendation?answers=${query}`);
-    //     } catch (err) {
-    //         console.error('Submission error', err);
-    //         alert('Failed to submit.');
-    //     }
-    // };
-
-    // if (loading) return <p>Loading questions...</p>;
-
+    
     useEffect(() => {
         if (!token) return;
 
@@ -146,7 +85,7 @@ export default function Ass() {
                         <h1 className="text-2xl font-bold">Assessment</h1>
                         <h2 className="text-sm/6 font-medium">Isi survei dibawah sesuai dengan kondisimu sekarang.</h2>
                     </div>
-                    <Link href="/home/assessment/hasil-assessment" className="flex gap-2 justify-center items-center px-3 my-2 mr-10 rounded-xl bg-sky-600 hover:bg-sky-500 font-medium">
+                    <Link href="/home/assessment/hasil-assessment" className="flex gap-2 justify-center items-center px-3 my-2 mr-10 rounded-xl text-sky-50 bg-sky-600 hover:bg-sky-500 font-medium">
                         Hasil Assessment <ArrowRightIcon className="hidden sm:inline size-4"/>
                     </Link>
                 </div>

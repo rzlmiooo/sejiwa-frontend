@@ -66,6 +66,8 @@ export default function HasilAssessment() {
                     (answer) => String(answer.student_id) === String(studentId)
                 );
                 setAssessmentAnswers(filteredAssessmentAnswers);
+                console.log(allAssessmentAnswers);
+                
 
             } catch (err) {
                 console.error('Error fetching data:', err);
@@ -126,7 +128,7 @@ export default function HasilAssessment() {
                             </>
                         )}
                         {roomCodes.length === 0 && !loading && (
-                            <p className="mt-4 text-gray-600 dark:text-gray-300">No rooms found for this student.</p>
+                            <p className="mt-4 text-gray-600 dark:text-gray-300">Belum ada Assessment.</p>
                         )}
 
                         <div className="mt-6 mb-10 flex items-center justify-center sm:mt-8" aria-label="Page navigation">
@@ -179,7 +181,7 @@ export default function HasilAssessment() {
 
                         {assessmentAnswers.length > 0 && (
                             <>
-                                <h3 className="text-xl font-semibold mt-8 mb-4 dark:text-white">Assessment Answers for this Student:</h3>
+                                <h3 className="text-xl font-semibold mt-8 mb-4 dark:text-white">Daftar Hasil Assessment</h3>
                                 <div className="flow-root sm:mt-8">
                                     <div className="divide-y divide-gray-200 dark:divide-gray-700">
                                         {assessmentAnswers.map((answer) => (
@@ -192,7 +194,7 @@ export default function HasilAssessment() {
                                                 </dl>
                                                 <dl className="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
                                                     <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Emosi:</dt>
-                                                    <dd className="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{answer.code}</dd>
+                                                    <dd className="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{answer.question_code}</dd>
                                                 </dl>
                                                 <dl className="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
                                                     <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Waktu Pembuatan:</dt>

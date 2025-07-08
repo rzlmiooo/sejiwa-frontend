@@ -154,7 +154,7 @@ export default function ChatKonselor() {
                             className="text-lg border-none focus:outline-none"
                             onKeyDown={(e) => e.key === 'Enter' && handleJoinRoom()}
                         />
-                        <button onClick={handleJoinRoom} className="p-2 rounded-2xl bg-sky-600 hover:bg-sky-500">Join Room</button>
+                        <button onClick={handleJoinRoom} className="p-2 rounded-2xl text-sky-50 bg-sky-600 hover:bg-sky-500">Join Room</button>
                     </div>
                 </>
             )}

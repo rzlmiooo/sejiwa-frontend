@@ -39,7 +39,7 @@ export default function Setting() {
             <h2 className="text-xl font-bold text-gray-900 dark:text-sky-50">Keluar dari Akun</h2>
             <p className="text-sm text-gray-600 dark:text-sky-50">Terimakasih telah menggunakan Sejiwa.</p>
             <div className="mt-12 flex justify-center items-center">
-              <ArrowLeftStartOnRectangleIcon className='size-28 text-gray-100 dark:text-gray-300'/>
+              <ArrowLeftStartOnRectangleIcon className='size-28 text-gray-300 dark:text-gray-300'/>
             </div>
         </button>
 

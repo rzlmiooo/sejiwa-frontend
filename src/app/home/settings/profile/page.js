@@ -217,38 +217,20 @@ export default function ProfilePage() {
     );
 
   return (
-    <div className="flex h-screen">
-      <button
-        data-drawer-target="default-sidebar"
-        data-drawer-toggle="default-sidebar"
-        aria-controls="default-sidebar"
-        type="button"
-        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-      >
-        <span className="sr-only">Open sidebar</span>
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path
-            clipRule="evenodd"
-            fillRule="evenodd"
-            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-          />
-        </svg>
-      </button>
-
+    <div className="flex-1 h-screen">
       <main className="flex-1 p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto p-8">
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center justify-center gap-4">
             <img
               src={preview || user.profile_picture || '/profile.png'}
               alt="Profile Picture"
               className="w-64 h-64 rounded-full object-cover border-4 border-gray-300"
             />
-
             <input
               type="file"
               accept="image/*"
               onChange={handleProfilePictureUpload}
-              className="text-sm"
+              className="flex w-50 justify-center items-center p-2 text-sm font-medium text-sky-50 bg-sky-600 hover:bg-sky-500 rounded-lg cursor-pointer"
             />
             {imageLoading && <p className="text-blue-500">Uploading image...</p>}
             {imageError && <p className="text-red-500">{imageError}</p>}
@@ -329,7 +311,7 @@ export default function ProfilePage() {
             <div className="flex gap-4">
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+                className="bg-sky-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-sky-500 disabled:opacity-50"
                 disabled={imageLoading} 
               >
                 Save Changes
@@ -338,7 +320,7 @@ export default function ProfilePage() {
               <button
                 type="button"
                 onClick={handleDelete}
-                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                className="bg-red-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-red-700"
               >
                 Delete Account
               </button>
