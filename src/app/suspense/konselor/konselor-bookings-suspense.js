@@ -106,7 +106,7 @@ export default function BookingHome() {
       const rooms = roomRes.data;
       const lastRoom = rooms.at(-1);
   
-      if (lastRoom?.id && res.status === 200 || res.status === 201) {
+      if (lastRoom?.id && (res.status === 200 || res.status === 201) & status === 'accepted') {
         localStorage.setItem("activeRoomId", lastRoom.id);
         setDoneMessage('Konsultasi Diterima!');
         redirectToSuccessBooking();
