@@ -111,7 +111,7 @@ export default function ChatKonselor() {
                 const allRooms = roomsRes.data || [];
 
                 const roomUser = allRooms.filter(
-                    (room) => room.student_id === senderId
+                    (room) => room.counselor_id === senderId
                 );
                 
                 console.log(roomUser);

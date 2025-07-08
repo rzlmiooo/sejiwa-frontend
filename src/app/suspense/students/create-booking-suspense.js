@@ -41,6 +41,7 @@ export default function CreateBooking() {
         const payload = {
             student_id: studentId,
             schedule_id: scheduleId,
+            counselor_id: counselorId,
             status: "pending",
             created_at: new Date(),
         }
