@@ -1,19 +1,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { getStudentId } from '@/app/utils/auth/auth';
 
 export default function BookingHome() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [showDone, setShowDone] = useState(false);
   const [doneMessage, setDoneMessage] = useState('');
   const [rejectedMessage, setRejectedMessage] = useState('');
   const [bookings, setBookings] = useState([]);
   const [isClient, setIsClient] = useState(false);
   const [token, setToken] = useState(null);
-  const studentId = searchParams.get('student_id');
+  const userId = getStudentId();
+  const [loading, setLoading] = useState(false);
 
   const handleSelect = (scheduleId, counselor_id) => {
     router.push(`/home/bookings/create-booking?student_id=${studentId}&schedule_id=${scheduleId}&counselor_id=${counselor_id}`);
@@ -35,91 +36,115 @@ export default function BookingHome() {
 
   useEffect(() => {
     if (!token) return;
-
+  
     const fetchData = async () => {
       try {
-        const usersRes = await axios.get('https://sejiwa.onrender.com/api/users', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        const bookingsRes = await axios.get('https://sejiwa.onrender.com/api/bookings', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
+        // 1. Ambil semua user dan bookings
+        const [usersRes, bookingsRes] = await Promise.all([
+          axios.get('https://sejiwa.onrender.com/api/users', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }),
+          axios.get('https://sejiwa.onrender.com/api/bookings', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }),
+        ]);
+  
         const users = usersRes.data || [];
         const allBookings = bookingsRes.data || [];
-        const pendingBookings = allBookings.filter(b => b.status === 'pending');
-
-        const combinedData = pendingBookings.map(booking => {
-          const user = users.find(u => u.id === booking.student_id);
+  
+        // 2. Ambil userId dari token / localStorage / context
+        if (!userId) return;
+  
+        // 3. Filter hanya booking yang pending dan milik si konselor ini
+        const pendingBookings = allBookings.filter(
+          (b) =>
+            b.status === "pending" &&
+            b.counselor_id === userId
+        );
+  
+        // 4. Gabungkan data pelajar ke masing-masing booking
+        const combinedData = pendingBookings.map((booking) => {
+          const user = users.find((u) => u.id === booking.student_id);
           return {
             ...booking,
             user,
           };
         });
-
-        console.log("iki booking: ")
-        console.log(combinedData);
-
+  
+        console.log("Booking (combined):", combinedData);
         setBookings(combinedData);
       } catch (err) {
-        console.error('Error fetching data:', err);
+        console.error("Error fetching data:", err);
       }
     };
+  
+    fetchData(); // jalankan pertama kali
+    const interval = setInterval(fetchData, 10000); // auto refresh tiap 10 detik
+  
+    return () => clearInterval(interval); // bersihkan interval saat unmount
+  }, [token]);
+  
 
-    fetchData();
-    const interval = setInterval(fetchData, 10000);
+  const handleSubmit = async (bookingId, studentId, counselorId, scheduleId, status) => {
+    if (!token || loading) return; // cegah spam click
 
-    return () => clearInterval(interval);
-  }, [token, searchParams]);
-
-  const handleSubmit = async (bookingId, studentId, scheduleId, status) => {
-    if (!token) return;
+    setLoading(true); // ⏳ mulai loading
 
     const payload = {
-      student_id: studentId,
       schedule_id: scheduleId,
+      student_id: studentId,
+      counselor_id: counselorId,
       status,
       created_at: new Date(),
     };
-
+  
     try {
+      // 1. Update status booking
       const res = await axios.put(`https://sejiwa.onrender.com/api/bookings/${bookingId}`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
-
-      const roomRes = await axios.get("https://sejiwa.onrender.com/api/chats/rooms", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
   
-      const rooms = roomRes.data;
-      const lastRoom = rooms.at(-1);
+      if (status === 'confirm' && (res.status === 200 || res.status === 201)) {
+        // 2. Fetch latest room
+        const roomRes = await axios.get("https://sejiwa.onrender.com/api/chats/rooms", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
   
-      if (lastRoom?.id && (res.status === 200 || res.status === 201) & status === 'confirm') {
-        localStorage.setItem("activeRoomId", lastRoom.id);
-        setDoneMessage('Konsultasi Diterima!');
-        redirectToSuccessBooking();
+        const rooms = roomRes.data || [];
+        const sortedRooms = rooms.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        const lastRoom = sortedRooms[0];
+  
+        if (lastRoom?.id) {
+          localStorage.setItem("activeRoomId", lastRoom.id);
+          setDoneMessage("Konsultasi Diterima!");
+          redirectToSuccessBooking();
+        } else {
+          console.error("Room tidak ditemukan.");
+        }
       } else if (status === 'rejected') {
-        setRejectedMessage('Konsultasi Ditolak!');
+        setRejectedMessage("Konsultasi Ditolak!");
         refreshBooking();
       } else {
-        console.error('Unexpected server response.');
+        console.error("Unexpected server response.");
       }
     } catch (err) {
-      console.error('Booking request failed:', err);
+      console.error("Booking request failed:", err);
+    } finally {
+      setLoading(false);
     }
   };
+  
 
   if (!isClient) return null;
 
@@ -155,19 +180,21 @@ export default function BookingHome() {
                 <div>
                   <button
                     type="button"
-                    className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-8 py-2.5 text-center m-2"
-                    onClick={() => handleSubmit(booking.id, booking.student_id, booking.schedule_id, 'confirm')}
+                    disabled={loading}
+                    className={`text-sky-50 font-medium rounded-lg text-sm px-8 py-2.5 text-center m-2${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'}`}
+                    onClick={() => handleSubmit(booking.id, booking.student_id, booking.counselor_id, booking.schedule_id, 'confirm')}
                   >
-                    Terima
+                    {loading ? 'Loading...' : 'Terima'}
                   </button>
                 </div>
                 <div>
                   <button
                     type="button"
-                    className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-8 py-2.5 text-center m-2"
-                    onClick={() => handleSubmit(booking.id, booking.student_id, booking.schedule_id, 'rejected')}
+                    disabled={loading}
+                    className={`text-sky-50 font-medium rounded-lg text-sm px-8 py-2.5 text-center m-2${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'}`}
+                    onClick={() => handleSubmit(booking.id, booking.student_id, booking.counselor_id, booking.schedule_id, 'rejected')}
                   >
-                    Tolak
+                    {loading ? 'Loading...' : 'Terima'}
                   </button>
                 </div>
 

@@ -18,8 +18,8 @@ export default function CreateBooking() {
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-    const redirectToSuccessBooking = () => {
-        router.push(`/home/chat/chat-pelajar/?student_id=${studentId}`);
+    const redirectToSuccessBooking = (studentId, counselorId) => {
+        router.push(`/home/chat/chat-pelajar/?student_id=${studentId}&counselor_id=${counselorId}`);
         // router.push("/home/chat/booking/success-booking")
     };
 
@@ -33,6 +33,7 @@ export default function CreateBooking() {
     });
 
     const [state, setState] = useState("");
+    
 
     const handleSubmitClick = async (e) => {
         if (!token) return;
@@ -60,14 +61,15 @@ export default function CreateBooking() {
                     successMessage: "Booking sukses. Redirecting ke halaman Chat...",
                     errorMessage: null,
                 }));
-                redirectToSuccessBooking();
+                redirectToSuccessBooking(studentId, counselorId);
             } else {
                 setState((prev) => ({
                     ...prev,
                     errorMessage: "Koneksi Buruk.",
                 }));
-            }
-            return redirectToSuccessBooking();
+            }       ;
+            
+            return redirectToSuccessBooking(studentId, counselorId);
         } catch (error) {
             console.error("Booking request failed:", error);
             setState((prev) => ({
