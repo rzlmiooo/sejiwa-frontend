@@ -106,7 +106,7 @@ export default function BookingHome() {
       const rooms = roomRes.data;
       const lastRoom = rooms.at(-1);
   
-      if (lastRoom?.id && (res.status === 200 || res.status === 201) & status === 'accepted') {
+      if (lastRoom?.id && (res.status === 200 || res.status === 201) & status === 'confirm') {
         localStorage.setItem("activeRoomId", lastRoom.id);
         setDoneMessage('Konsultasi Diterima!');
         redirectToSuccessBooking();
@@ -116,20 +116,6 @@ export default function BookingHome() {
       } else {
         console.error('Unexpected server response.');
       }
-
-      // if (res.status === 200 || res.status === 201) {
-      //   if (status === 'confirm') {
-      //     setDoneMessage('Konsultasi Diterima!');
-      //     redirectToSuccessBooking(bookings.student_id);
-      //   } else if (status === 'rejected') {
-      //     setRejectedMessage('Konsultasi Ditolak!');
-      //     refreshBooking();
-      //   }
-
-      //   setShowDone(true);
-      // } else {
-      //   console.error('Unexpected server response.');
-      // }
     } catch (err) {
       console.error('Booking request failed:', err);
     }
