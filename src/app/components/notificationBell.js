@@ -3,6 +3,7 @@
 import { BellIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 export default function NotificationBell() {
   const [count, setCount] = useState(0);
@@ -94,12 +95,12 @@ const handleMouseEnter = () => {
             {count > 0 ? (
                 <>
                 <p className="mb-2 font-medium">{count} Booking terbaru</p>
-                <a
+                <Link
                     href="/konselor/bookings"
                     className="text-sky-500 hover:underline"
                 >
                     Pergi ke Booking
-                </a>
+                </Link>
                 </>
             ) : (
                 <>
