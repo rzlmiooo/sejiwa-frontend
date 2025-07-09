@@ -201,8 +201,8 @@ export default function Chat() {
 
                     {isValid ? (
                         <button
-                            onClick={handleSubmit}
-                            className="w-full md:w-100 px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white font-semibold transition"
+                            onClick={handleCreateRoom}
+                            className="flex flex-col w-full md:w-100 px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white font-semibold transition"
                         >
                             Booking Sekarang
                         </button>
