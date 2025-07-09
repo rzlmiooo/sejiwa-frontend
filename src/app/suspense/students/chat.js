@@ -7,8 +7,16 @@ import { getStudentId } from "@/app/utils/auth/auth";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import Back from "@/app/components/back";
 
 export default function Chat() {
+    useEffect(() => {
+        return () => {
+          localStorage.removeItem('activeRoomId');
+          console.log('Room ID removed from localStorage');
+        };
+    }, []);
+
     const [isOpen, setIsOpen] = useState(false);
     const menuButtonRef = useRef(null);
     const menuDropdownRef = useRef(null);
@@ -17,13 +25,16 @@ export default function Chat() {
     const [title, setTitle] = useState("");
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
+    const [roomCode, setRoomJoin] = useState([]);
     const messagesEndRef = useRef();
     const senderId = getStudentId();
     const [error, setError] = useState("");
     const sessionId = `session-${roomId}`;
+    const [loading, setLoading] = useState(false);
     const searchParams = useSearchParams();
     const studentId = searchParams.get('student_id');
     const counselorId = searchParams.get('counselor_id');
+    const isValid = studentId && counselorId;
     
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
@@ -141,32 +152,85 @@ export default function Chat() {
     };
 
     useEffect(() => {
+        if (!token) return;
+
+        const fetchRoomUser = async () => {
+            try {
+                const roomsRes = await axios.get('https://sejiwa.onrender.com/api/chats/rooms', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const allRooms = roomsRes.data || [];
+
+                const roomUser = allRooms.filter(
+                    (room) => room.student_id === senderId
+                );
+                
+                console.log(roomUser);
+
+                setRoomJoin(roomUser);
+            } catch (err) {
+                console.error('Error fetching rooms', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchRoomUser();
+    }, [token, studentId]);
+
+    useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
     return (
-        <div className="text-gray-900 dark:text-sky-50 p-8 pr-22 sm:pr-6 w-full mx-auto">
-            <h1 className="text-2xl font-bold mb-4">Sejiwa Chat App</h1>
+        <div className="flex-1 flex-col text-gray-900 dark:text-sky-50 p-8 pr-22 sm:pr-6 w-full mx-auto">
+            <h1 className="text-3xl font-bold mb-4">Chat</h1>
             {!roomId && (
             <>
-                <div className="mb-4 space-y-2">
+                <div className="my-6 space-y-2 w-full">
                     <input
-                    className="w-full px-4 py-2 border border-gray-300 rounded"
-                    placeholder="Room title"
+                    className="w-full md:w-100 px-4 py-2 border border-gray-300 rounded"
+                    placeholder="Buat Room baru, masukkan judul Room"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     />
-                    <button
-                    onClick={handleCreateRoom}
-                    className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-                    >
-                    Create Room
-                    </button>
+
+                    {isValid ? (
+                        <button
+                            onClick={handleSubmit}
+                            className="w-full md:w-100 px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white font-semibold transition"
+                        >
+                            Booking Sekarang
+                        </button>
+                        ) : (
+                        <div
+                            className="w-full md:w-100 px-4 py-2 rounded bg-gray-600 text-white font-semibold cursor-not-allowed text-center"
+                        >
+                            Anda Belum Booking
+                        </div>
+                    )}
+
                 </div>
-                <div className="space-y-2">
+                <div className="w-full md:w-100 mt-10 text-gray-900 dark:text-sky-50">
+                    <span className="text-xl font-bold text-lime-300 pr-2">Perhatian!</span>
+                    Kalau Anda sebelumnya sudah melakukan Booking, silahkan masukkan Room ID yang didapat setelah booking.
+                </div>
+                <div className="flex my-2 gap-2 text-sm text-gray-900 dark:text-sky-50">
+                    Room ID sebelumnya:
+                    {roomCode?.length > 0 ? (
+                        <h2>{roomCode[roomCode.length - 1].id}</h2>
+                        ) : (
+                        <p>No rooms found.</p>
+                    )}
+                </div>
+                <div className="mb-10 space-y-2 w-full md:w-100">
                     <input
                     className="w-full px-4 py-2 border border-gray-300 rounded"
-                    placeholder="Enter room ID"
+                    placeholder="Masukkan Room ID"
                     value={inputRoomId}
                     onChange={(e) => setInputRoomId(e.target.value)}
                     />
@@ -177,6 +241,7 @@ export default function Chat() {
                     Join Room
                     </button>
                 </div>
+                <Back />
             </>
             )}
             {roomId && (

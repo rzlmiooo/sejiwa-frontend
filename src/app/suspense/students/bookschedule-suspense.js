@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
 import { getStudentId } from "@/app/utils/auth/auth";
+import Back from "@/app/components/back";
 
 export default function BookingSchedule() {
   const searchParams = useSearchParams();
@@ -43,7 +44,8 @@ export default function BookingSchedule() {
 
   return (
     <div className="flex-1 p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
-      <h1 className="text-2xl font-bold">Welcome to your Booking</h1>
+      <Back />
+      <h1 className="mt-4 text-2xl font-bold">Welcome to your Booking</h1>
       {/* Add your content here */}
       {bookings.length === 0 ? (
         <p>No bookings found.</p>

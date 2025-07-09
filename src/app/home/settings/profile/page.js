@@ -164,7 +164,7 @@ export default function ProfilePage() {
     };
 
     try {
-      await axios.put(`https://sejiwa.onrender.com/api/users/${userId}`, payload, {
+      await axios.patch(`https://sejiwa.onrender.com/api/users/${userId}`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

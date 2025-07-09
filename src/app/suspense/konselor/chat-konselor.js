@@ -9,6 +9,16 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 export default function ChatKonselor() {
+    useEffect(() => {
+        // ⏳ Saat komponen dipasang (mount) — do nothing
+    
+        return () => {
+          // 💣 Saat komponen dilepas (unmount), hapus roomId dari localStorage
+          localStorage.removeItem('activeRoomId');
+          console.log('Room ID removed from localStorage');
+        };
+    }, []);
+
     const [isOpen, setIsOpen] = useState(false);
     const searchParams = useSearchParams();
     const menuButtonRef = useRef(null);
@@ -134,17 +144,17 @@ export default function ChatKonselor() {
     return (
         <div className="text-gray-900 dark:text-sky-50 p-8 pr-22 sm:pr-6 w-full mx-auto">
             <h1 className="text-2xl font-bold mb-4">Sejiwa Chat App</h1>
-            <div className="flex gap-2 text-xs text-gray-900 dark:text-sky-50">
-                Room ID tersedia:
-                {roomCode?.length > 0 ? (
-                    <h2>{roomCode[roomCode.length - 1].id}</h2>
-                    ) : (
-                    <p>No rooms found.</p>
-                )}
-            </div>
             
             {!roomId && (
                 <>
+                    <div className="flex gap-2 text-xs text-gray-900 dark:text-sky-50">
+                        Room ID tersedia:
+                        {roomCode?.length > 0 ? (
+                            <h2>{roomCode[roomCode.length - 1].id}</h2>
+                            ) : (
+                            <p>No rooms found.</p>
+                        )}
+                    </div>
                     <div className="my-5">
                         <span className="mr-2">Room ID:</span>
                         <input
