@@ -4,8 +4,10 @@ import { BellIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { getStudentId } from '../utils/auth/auth';
 
 export default function NotificationBell() {
+  const userId = getStudentId();
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
   const [role, setRole] = useState(null);
@@ -24,26 +26,37 @@ export default function NotificationBell() {
 
     const fetchNewBookings = async () => {
       try {
-        const usersRes = await axios.get('https://sejiwa.onrender.com/api/users', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        const bookingsRes = await axios.get('https://sejiwa.onrender.com/api/bookings', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
+        const [usersRes, bookingsRes] = await Promise.all([
+          axios.get('https://sejiwa.onrender.com/api/users', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }),
+          axios.get('https://sejiwa.onrender.com/api/bookings', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }),
+        ]);
 
         const users = usersRes.data || [];
         const allBookings = bookingsRes.data || [];
-        const pendingBookings = allBookings.filter(b => b.status === 'pending');
-
-        const combinedData = pendingBookings.map(booking => {
-          const user = users.find(u => u.id === booking.student_id);
+  
+        // 2. Ambil userId dari token / localStorage / context
+        if (!userId) return;
+  
+        // 3. Filter hanya booking yang pending dan milik si konselor ini
+        const pendingBookings = allBookings.filter(
+          (b) =>
+            b.status === "pending" &&
+            b.counselor_id === userId
+        );
+  
+        // 4. Gabungkan data pelajar ke masing-masing booking
+        const combinedData = pendingBookings.map((booking) => {
+          const user = users.find((u) => u.id === booking.student_id);
           return {
             ...booking,
             user,

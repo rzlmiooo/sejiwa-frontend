@@ -122,9 +122,14 @@ export default function BookingHome() {
         });
   
         const rooms = roomRes.data || [];
-        const sortedRooms = rooms.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-        const lastRoom = sortedRooms[0];
-  
+        // const sortedRooms = rooms.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        // const lastRoom = sortedRooms[0];
+        const roomUser = rooms
+          .filter((room) => room.counselor_id === userId)
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // ⬅️ ASCENDING
+        
+        const lastRoom = roomUser.at(-1);
+
         if (lastRoom?.id) {
           localStorage.setItem("activeRoomId", lastRoom.id);
           setDoneMessage("Konsultasi Diterima!");
@@ -194,7 +199,7 @@ export default function BookingHome() {
                     className={`text-sky-50 font-medium rounded-lg text-sm px-8 py-2.5 text-center m-2${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'}`}
                     onClick={() => handleSubmit(booking.id, booking.student_id, booking.counselor_id, booking.schedule_id, 'rejected')}
                   >
-                    {loading ? 'Loading...' : 'Terima'}
+                    {loading ? 'Loading...' : 'Tolak'}
                   </button>
                 </div>
 
