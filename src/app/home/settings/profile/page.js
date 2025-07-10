@@ -224,14 +224,22 @@ export default function ProfilePage() {
             <img
               src={preview || user.profile_picture || '/profile.png'}
               alt="Profile Picture"
-              className="w-64 h-64 rounded-full object-cover border-4 border-gray-300"
+              className="w-48 sm:w-64 h-48 sm:h-64 rounded-full object-cover border-4 border-gray-300"
             />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleProfilePictureUpload}
-              className="flex w-50 justify-center items-center p-2 text-sm font-medium text-sky-50 bg-sky-600 hover:bg-sky-500 rounded-lg cursor-pointer"
-            />
+            <div className='flex items-center bg-sky-600 hover:bg-sky-500 rounded-lg cursor-pointer p-2'>
+              <img
+                src="/edit.png"
+                alt="Edit"
+                className="w-5 h-5"
+              >
+              </img>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleProfilePictureUpload}
+                className="flex w-50 justify-center items-center pl-4 text-sm text-sky-50"
+              />
+            </div>
             {imageLoading && <p className="text-blue-500">Uploading image...</p>}
             {imageError && <p className="text-red-500">{imageError}</p>}
           </div>
@@ -311,7 +319,7 @@ export default function ProfilePage() {
             <div className="flex gap-4">
               <button
                 type="submit"
-                className="bg-sky-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-sky-500 disabled:opacity-50"
+                className="bg-sky-600 text-white text-sm px-4 py-2 rounded-lg cursor-pointer hover:bg-sky-500 disabled:opacity-50"
                 disabled={imageLoading} 
               >
                 Save Changes
@@ -320,7 +328,7 @@ export default function ProfilePage() {
               <button
                 type="button"
                 onClick={handleDelete}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-red-700"
+                className="bg-red-600 text-white text-sm px-4 py-2 rounded-lg cursor-pointer hover:bg-red-700"
               >
                 Delete Account
               </button>
