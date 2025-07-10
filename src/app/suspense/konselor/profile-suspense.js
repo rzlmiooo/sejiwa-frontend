@@ -164,7 +164,7 @@ export default function ProfilePage() {
     };
 
     try {
-      await axios.put(`https://sejiwa.onrender.com/api/users/${userId}`, payload, {
+      await axios.patch(`https://sejiwa.onrender.com/api/users/${userId}`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -217,21 +217,29 @@ export default function ProfilePage() {
     );
 
   return (
-    <div className="flex-1 h-screen">
+    <div className="flex-1 h-screen overflow-y-scroll">
       <main className="flex-1 p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto p-8">
           <div className="flex flex-col items-center justify-center gap-4">
             <img
               src={preview || user.profile_picture || '/profile.png'}
               alt="Profile Picture"
-              className="w-64 h-64 rounded-full object-cover border-4 border-gray-300"
+              className="w-48 sm:w-64 h-48 sm:h-64 rounded-full object-cover border-4 border-gray-300"
             />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleProfilePictureUpload}
-              className="text-sm text-white font-medium p-2 rounded-lg w-50 bg-sky-600 hover:bg-sky-500 cursor-pointer"
-            />
+            <div className='flex items-center bg-sky-600 hover:bg-sky-500 rounded-lg cursor-pointer p-2'>
+              <img
+                src="/edit.png"
+                alt="Edit"
+                className="w-5 h-5"
+              >
+              </img>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleProfilePictureUpload}
+                className="flex w-50 justify-center items-center pl-4 text-sm text-sky-50"
+              />
+            </div>
             {imageLoading && <p className="text-blue-500">Uploading image...</p>}
             {imageError && <p className="text-red-500">{imageError}</p>}
           </div>
@@ -250,7 +258,7 @@ export default function ProfilePage() {
                 id="username" 
                 value={username}
                 onChange={handleInputChange}
-                className="w-full border rounded px-3 py-2 text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full border rounded px-3 py-2 text-black text-sm dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
 
@@ -264,7 +272,7 @@ export default function ProfilePage() {
                 id="email"
                 value={email}
                 onChange={handleInputChange}
-                className="w-full border rounded px-3 py-2 text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full border rounded px-3 py-2 text-black text-sm dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
 
@@ -277,7 +285,7 @@ export default function ProfilePage() {
                 id="password"
                 value={password}
                 onChange={handleInputChange}
-                className="w-full border rounded px-3 py-2 text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full border rounded px-3 py-2 text-black text-sm dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
 
@@ -290,7 +298,7 @@ export default function ProfilePage() {
                 id="confirmPassword"
                 value={confirmPassword}
                 onChange={handleInputChange}
-                className="w-full border rounded px-3 py-2 text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full border rounded px-3 py-2 text-black text-sm dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
 
@@ -304,14 +312,14 @@ export default function ProfilePage() {
                 id="role"
                 value={role}
                 onChange={handleInputChange}
-                className="w-full border rounded px-3 py-2 text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full border rounded px-3 py-2 text-black text-sm dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
 
             <div className="flex gap-4">
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-700 disabled:opacity-50"
+                className="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-700 disabled:opacity-50"
                 disabled={imageLoading} 
               >
                 Save Changes
@@ -320,7 +328,7 @@ export default function ProfilePage() {
               <button
                 type="button"
                 onClick={handleDelete}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-red-700"
+                className="bg-red-600 text-white text-sm px-4 py-2 rounded-lg cursor-pointer hover:bg-red-700"
               >
                 Delete Account
               </button>

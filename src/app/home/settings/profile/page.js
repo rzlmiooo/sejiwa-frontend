@@ -217,7 +217,7 @@ export default function ProfilePage() {
     );
 
   return (
-    <div className="flex-1 h-screen">
+    <div className="flex-1 h-screen overflow-y-scroll">
       <main className="flex-1 p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto p-8">
           <div className="flex flex-col items-center justify-center gap-4">
