@@ -218,7 +218,7 @@ export default function ProfilePage() {
 
   return (
     <div className="flex-1 h-screen overflow-y-scroll">
-      <main className="flex-1 p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
+      <main className="flex-1 p-4 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto p-8">
           <div className="flex flex-col items-center justify-center gap-4">
             <img
@@ -258,7 +258,7 @@ export default function ProfilePage() {
                 id="username" 
                 value={username}
                 onChange={handleInputChange}
-                className="w-full border rounded px-3 py-2 text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full border rounded px-3 py-2 text-black text-sm dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
 
@@ -272,7 +272,7 @@ export default function ProfilePage() {
                 id="email"
                 value={email}
                 onChange={handleInputChange}
-                className="w-full border rounded px-3 py-2 text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full border rounded px-3 py-2 text-black text-sm dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
 
@@ -285,7 +285,7 @@ export default function ProfilePage() {
                 id="password"
                 value={password}
                 onChange={handleInputChange}
-                className="w-full border rounded px-3 py-2 text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full border rounded px-3 py-2 text-black text-sm dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
 
@@ -298,7 +298,7 @@ export default function ProfilePage() {
                 id="confirmPassword"
                 value={confirmPassword}
                 onChange={handleInputChange}
-                className="w-full border rounded px-3 py-2 text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full border rounded px-3 py-2 text-black text-sm dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
 
@@ -312,7 +312,7 @@ export default function ProfilePage() {
                 id="role"
                 value={role}
                 onChange={handleInputChange}
-                className="w-full border rounded px-3 py-2 text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full border rounded px-3 py-2 text-black text-sm dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
 
