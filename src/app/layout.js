@@ -1,6 +1,5 @@
 import "./globals.css";
 import AuthRedirect from "./utils/auth/redirect";
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   title: "Welcome to Sejiwa",
@@ -11,7 +10,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <SpeedInsights/>
         <AuthRedirect/>
         {children}
       </body>
