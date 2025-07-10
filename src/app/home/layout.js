@@ -5,6 +5,7 @@ import Navbar from "../components/navbar"
 import { useState, useEffect } from "react"
 import localFont from "next/font/local"
 import { useRouter } from "next/navigation"
+import { Toaster } from "react-hot-toast"
 
 const rubik = localFont({
     src: [
@@ -61,6 +62,7 @@ export default function Homepage({ children }){
                 {/* sidebar */}
                 <Sidebar isOpen={isSidebarOpen} />
                 {children}
+                <Toaster position="top-center" />
             </div>
         </div>
     )

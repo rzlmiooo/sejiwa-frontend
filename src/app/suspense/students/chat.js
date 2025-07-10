@@ -8,6 +8,7 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Back from "@/app/components/back";
+import toast from "react-hot-toast";
 
 export default function Chat() {
     useEffect(() => {
@@ -84,6 +85,37 @@ export default function Chat() {
             socketRef.current = null;
         };
     }, [roomId]);
+
+    useEffect(() => {
+        if (!token) return;
+
+        const fetchRoomUser = async () => {
+            try {
+                const roomsRes = await axios.get('https://sejiwa.onrender.com/api/chats/rooms', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const allRooms = roomsRes.data || [];
+
+                const roomUser = allRooms.filter(
+                    (room) => room.student_id === senderId
+                );
+                
+                console.log(roomUser);
+
+                setRoomJoin(roomUser);
+            } catch (err) {
+                console.error('Error fetching rooms', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchRoomUser();
+    }, [token, studentId]);
     
     const handleCreateRoom = async (e) => {
         if (!token) return;
@@ -123,7 +155,13 @@ export default function Chat() {
 
     const handleJoinRoom = () => {
         if (inputRoomId.trim()) {
-            setRoomId(inputRoomId.trim());
+            if (inputRoomId !== String(roomCode[roomCode.length - 1].id)) {
+                toast.error("Room ID tidak sesuai dengan room terakhir kamu.");
+                return;
+            } else {
+                toast.success("Room ID sesuai. Masuk ke chat...");
+                setRoomId(inputRoomId.trim());
+            }
         }
     };
 
@@ -150,37 +188,6 @@ export default function Chat() {
             setMessage("");
         }
     };
-
-    useEffect(() => {
-        if (!token) return;
-
-        const fetchRoomUser = async () => {
-            try {
-                const roomsRes = await axios.get('https://sejiwa.onrender.com/api/chats/rooms', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                const allRooms = roomsRes.data || [];
-
-                const roomUser = allRooms.filter(
-                    (room) => room.student_id === senderId
-                );
-                
-                console.log(roomUser);
-
-                setRoomJoin(roomUser);
-            } catch (err) {
-                console.error('Error fetching rooms', err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchRoomUser();
-    }, [token, studentId]);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
