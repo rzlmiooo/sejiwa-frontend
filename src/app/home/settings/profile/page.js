@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'; 
 import { getStudentId } from '@/app/utils/auth/auth';
+import Image from 'next/image';
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -221,18 +222,19 @@ export default function ProfilePage() {
       <main className="flex-1 p-4 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto p-8">
           <div className="flex flex-col items-center justify-center gap-4">
-            <img
+            <Image
               src={preview || user.profile_picture || '/profile.png'}
               alt="Profile Picture"
+              width={500} height={500}
               className="w-48 sm:w-64 h-48 sm:h-64 rounded-full object-cover border-4 border-gray-300"
             />
             <div className='flex items-center bg-sky-600 hover:bg-sky-500 rounded-lg cursor-pointer p-2'>
-              <img
+              <Image
                 src="/edit.png"
                 alt="Edit"
+                width={100} height={100}
                 className="w-5 h-5"
-              >
-              </img>
+              />
               <input
                 type="file"
                 accept="image/*"

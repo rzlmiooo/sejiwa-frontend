@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Bento() {
     return (
@@ -8,7 +9,7 @@ export default function Bento() {
         <h2 className="text-xl font-bold text-gray-900 dark:text-sky-50">Assessment</h2>
         <p className="text-sm text-gray-600 dark:text-sky-50">Survei singkat untuk mengetahui isi hatimu.</p>
         <div className="mt-10 flex justify-center items-center">
-          <img src="/assessment.png" alt="Image 3" className="w-32 h-auto object-cover rounded-xl"/>
+          <Image src="/assessment.png" alt="Image 3" width={100} height={100} className="w-22 sm:w-32 h-auto object-cover rounded-xl"/>
         </div>
       </Link>
           
@@ -17,7 +18,7 @@ export default function Bento() {
           <h2 className="text-xl font-bold text-gray-900 dark:text-sky-50">Rekomendasi</h2>
           <p className="text-sm text-gray-600 dark:text-sky-50">Video dan artikel yang Sejiwa rekomendasikan khusus untukmu.</p>
           <div className="mt-10 flex justify-center items-center">
-            <img src="/like.png" alt="Image 3" className="w-32 h-auto object-cover rounded-xl"/>
+            <Image src="/like.png" alt="Image 3" width={100} height={100} className="w-24 sm:w-32 h-auto object-cover rounded-xl"/>
           </div>
       </Link>
           
@@ -26,7 +27,7 @@ export default function Bento() {
         <h2 className="text-xl font-bold text-gray-900 dark:text-sky-50">Chat</h2>
         <p className="text-sm text-gray-600 dark:text-sky-50">Pengalaman konseling terbaik dari para konselor profesional. Gratis.</p>
         <div className="mt-12 flex justify-center items-center">
-          <img src="/chat.png" alt="Image 3" className="w-32 h-auto object-cover rounded-xl"/>
+          <Image src="/chat.png" alt="Image 3" width={100} height={100} className="w-24 sm:w-32 h-auto object-cover rounded-xl"/>
         </div>
       </Link>
       </div>

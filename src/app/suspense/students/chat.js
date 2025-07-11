@@ -4,11 +4,12 @@ import axios from "axios";
 import { useEffect, useRef, useState } from 'react';
 import { io } from "socket.io-client";
 import { getStudentId } from "@/app/utils/auth/auth";
-import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
+import { PaperAirplaneIcon, ArrowUpRightIcon } from "@heroicons/react/24/solid";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Back from "@/app/components/back";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function Chat() {
     useEffect(() => {
@@ -194,7 +195,7 @@ export default function Chat() {
     }, [messages]);
 
     return (
-        <div className="flex-1 flex-col text-gray-900 dark:text-sky-50 p-8 pr-22 sm:pr-6 w-full mx-auto">
+        <div className="flex-1 flex-col text-gray-900 dark:text-sky-50 p-8 pr-22 sm:pr-6 w-full h-screen mx-auto">
             <h1 className="text-3xl font-bold mb-4">Chat</h1>
             {!roomId && (
             <>
@@ -207,18 +208,18 @@ export default function Chat() {
                     />
 
                     {isValid ? (
-                        <button
-                            onClick={handleCreateRoom}
-                            className="flex flex-col w-full md:w-100 px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white font-semibold transition"
-                        >
+                        <button onClick={handleCreateRoom}
+                            className="flex flex-col w-full md:w-100 px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white font-semibold transition">
                             Booking Sekarang
                         </button>
                         ) : (
-                        <div
-                            className="w-full md:w-100 px-4 py-2 rounded bg-gray-600 text-white font-semibold cursor-not-allowed text-center"
-                        >
-                            Anda Belum Booking
+                        <div className="flex flex-col items-start gap-3">
+                            <div className="w-full md:w-100 px-4 py-2 rounded bg-gray-600 text-white font-semibold cursor-not-allowed text-center">
+                                Anda Belum Booking
+                            </div>
+                            <Link href="/home/chat/find-conselor" className="flex justify-center items-center gap-1 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500">Booking Konselor <ArrowUpRightIcon className="size-3" /></Link>
                         </div>
+
                     )}
 
                 </div>

@@ -82,8 +82,8 @@ export default function Ass() {
             <main className="flex flex-col overflow-x-auto min-h-screen p-8 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
                 <div className='ml-4 sm:ml-18 flex gap-4 z-10 justify-between'>
                     <div className="flex flex-col">
-                        <h1 className="text-2xl font-bold">Assessment</h1>
-                        <h2 className="text-sm/6 font-medium">Isi survei dibawah sesuai dengan kondisimu sekarang.</h2>
+                        <h1 className="text-xl sm:text-2xl font-bold">Assessment</h1>
+                        <h2 className="pt-3 text xs/6 sm:text-sm/6 font-medium">Isi survei dibawah sesuai dengan kondisimu sekarang.</h2>
                     </div>
                     <Link href="/home/assessment/hasil-assessment" className="flex gap-2 justify-center items-center px-3 my-2 mr-10 rounded-xl text-sky-50 bg-sky-600 hover:bg-sky-500 font-medium">
                         Hasil Assessment <ArrowRightIcon className="hidden sm:inline size-4"/>

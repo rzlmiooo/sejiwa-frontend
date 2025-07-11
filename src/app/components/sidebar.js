@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link'
 import { AuthService } from '../service/AuthService';
-import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/solid';
 
 const navigation = [
     {src: '/dashboard.png', name: 'Beranda', href: '/home' },

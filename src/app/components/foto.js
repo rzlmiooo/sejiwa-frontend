@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getStudentId } from '../utils/auth/auth'
+import Image from 'next/image'
 
 export default function UserProfile() {
   const [userPicture, setUserPicture] = useState(null)
   const [loading, setLoading] = useState(true)
-  // const token = localStorage.getItem('token')
   const userId = getStudentId();
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
@@ -44,6 +44,6 @@ export default function UserProfile() {
   if (loading) return <img src="/profile.png"/>
 
   return (
-    <img src={ userPicture ? userPicture : "/profile.png" } alt="" className="p-0.5 bg-sky-50 dark:bg-sky-50 rounded-full w-10 h-10 object-cover"></img>
+    <Image src={ userPicture ? userPicture : "/profile.png" } alt="Profil" height={50} width={50} className="p-0.5 bg-sky-50 dark:bg-sky-50 rounded-full w-10 h-10 object-cover"></Image>
   )
 }

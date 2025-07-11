@@ -1,4 +1,5 @@
 'use client';
+
 import axios from 'axios';
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation';
@@ -124,8 +125,8 @@ export default function Recommendation() {
   );
 
   return (
-    <div className="flex mb-20 w-full overflow-y-scroll">
-      <main className="flex-1 p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
+    <div className="flex-1 mb-20 w-full overflow-y-scroll">
+      <main className="flex-1 p-4 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
         <div className="p-6">
           <h1 className="text-2xl font-bold mb-4">Rekomendasi untukmu</h1>
 
@@ -163,7 +164,10 @@ export default function Recommendation() {
           )}
 
           {low.length === 0 && medium.length === 0 && high.length === 0 && (
-            <p className="text-gray-600">Tidak ada rekomendasi yang tersedia untuk jawaban Anda.</p>
+            <div className="flex flex-col justify-center items-start gap-4">
+              <p className="text-gray-700 dark:text-gray-100">Kamu belum mengisi Assessment</p>
+              <Link href="/home/assessment" className="px-5 py-2 rounded-4xl bg-sky-600 hover:bg-sky-500 text-sky-50 flex items-center">Pergi ke Assessment <ArrowUpRightIcon className="size-4"/></Link>
+            </div>
           )}
         </div>
         <div className="p-6 flex flex-col gap-5">

@@ -58,7 +58,7 @@ export default function Homepage({ children }){
         <div className={`${rubik.className} font-sans h-screen flex flex-col bg-sky-50 dark:bg-gray-900 overflow-hidden`}>
             {/* header */}
             <Navbar toggleSidebar={toggleSidebar} />
-            <div className="h-screen flex flex-row">
+            <div className="flex flex-1 overflow-y-auto">
                 {/* sidebar */}
                 <Sidebar isOpen={isSidebarOpen} />
                 {children}
