@@ -261,10 +261,10 @@ export default function Chat() {
                 <ArrowLeftIcon className="w-4 h-4" />
                 <span>Kembali</span>
                 </button>
-                <h2 className="text-sm sm:text-lg font-bold mt-4 mb-4">
+                <h2 className="text-lg font-bold mt-4 mb-4">
                     Room ID: <strong>{roomId}</strong> — <span className="font-light">ingat Room ID ini agar bisa melanjutkan kembali chat dengan Konselor yang sama.</span>
                 </h2>
-                <div className="border border-gray-300 p-4 h-[500px] sm:h-[300px] overflow-y-auto mb-4 rounded bg-sky-50 dark:bg-gray-800">
+                <div className="border border-gray-300 p-4 h-[300px] overflow-y-auto mb-4 rounded bg-sky-50 dark:bg-gray-800">
                     {messages.map((msg, idx) => (
                     <div key={idx} className={`flex items-center mb-2 ${msg.sender_role === 'User' ? 'justify-end' : 'justify-start'}`}>
                         <span
