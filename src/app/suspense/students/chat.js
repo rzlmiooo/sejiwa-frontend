@@ -195,8 +195,8 @@ export default function Chat() {
     }, [messages]);
 
     return (
-        <div className="flex-1 flex-col text-gray-900 dark:text-sky-50 p-8 pr-22 sm:pr-6 w-full h-screen mx-auto">
-            <h1 className="text-3xl font-bold mb-4">Chat</h1>
+        <div className="flex-1 flex-col text-gray-900 dark:text-sky-50 p-8 sm:pr-6 w-full mx-auto overflow-auto sm:overflow-hidden">
+            <h1 className="text-3xl font-bold pb-4">Chat</h1>
             {!roomId && (
             <>
                 <div className="my-6 space-y-2 w-full">
