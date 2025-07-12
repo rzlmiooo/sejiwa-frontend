@@ -1,6 +1,11 @@
 import Link from "next/link"
 import Image from "next/image"
 
+export const metadata = {
+    title: 'Chat',
+    description: 'Chat bersama Konselor Profesional',
+}
+
 export default function ChatHome() {
     return (
         <div className="flex-1 flex-col justify-start items-start p-9 pb-32 sm:max-w-4xl overflow-y-scroll sm:overflow-y-hidden">
