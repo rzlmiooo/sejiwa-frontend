@@ -125,7 +125,7 @@ export default function Recommendation() {
   );
 
   return (
-    <div className="flex-1 mb-20 w-full overflow-y-scroll">
+    <div className="flex-1 pb-20 w-full overflow-y-scroll">
       <main className="flex-1 p-4 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
         <div className="p-6">
           <h1 className="text-2xl font-bold mb-4">Rekomendasi untukmu</h1>

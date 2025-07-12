@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function ChatHome() {
     return (
-        <div className="flex-1 flex-col justify-start items-start p-5 m-4 pb-32 sm:max-w-4xl overflow-y-scroll sm:overflow-y-hidden">
+        <div className="flex-1 flex-col justify-start items-start p-9 pb-32 sm:max-w-4xl overflow-y-scroll sm:overflow-y-hidden">
             {/* headline */}
             <div className="px-4 font-bold text-xl sm:text-2xl text-gray-900 dark:text-sky-50">
                 Temukan Konselor untukmu.<br/><span className="text-sm sm:text-lg font-medium">Klik Cari Konselor</span>

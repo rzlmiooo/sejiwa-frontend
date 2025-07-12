@@ -9,7 +9,7 @@ export default function Bento() {
         <h2 className="text-xl font-bold text-gray-900 dark:text-sky-50">Assessment</h2>
         <p className="text-sm text-gray-600 dark:text-sky-50">Survei singkat untuk mengetahui isi hatimu.</p>
         <div className="mt-10 flex justify-center items-center">
-          <Image src="/assessment.png" alt="Image 3" width={100} height={100} className="w-22 sm:w-32 h-auto object-cover rounded-xl"/>
+          <Image src="/assessment.png" alt="Image 3" width={100} height={100} priority className="w-22 sm:w-32 h-auto object-cover rounded-xl"/>
         </div>
       </Link>
           
