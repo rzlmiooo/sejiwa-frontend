@@ -42,43 +42,38 @@ export default function Homepage({ children }){
     const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
     useEffect(() => {
-      const interval = setInterval(() => {
+      const checkToken = () => {
         const token = localStorage.getItem('token');
-
         if (!token) {
-          // Kalau token gak ada sama sekali, langsung redirect
-          if (authorized) {
-            setAuthorized(false);
-            router.replace('/unauthorized');
-          }
+          router.replace('/unauthorized');
           return;
         }
-
+    
         try {
-          const payload = JSON.parse(atob(token.split('.')[1]));
-          const expired = payload.exp * 1000 < Date.now();
-
+          const payload  = JSON.parse(atob(token.split('.')[1]));
+          const expired  = payload.exp * 1000 < Date.now();
+    
           if (expired) {
-            setTimeout(() => {
-              toast.error('Sesi Anda telah berakhir. Silakan login ulang.');
-              setTimeout(() => {
-                AuthService.logout();
-              }, 2000); // kasih waktu 2 detik buat toast kelihatan
-            }, 1000); // delay awal 1 detik sebelum toast muncul
-            return;
+            toast.error('Sesi Anda telah berakhir. Silakan login ulang.');
+            AuthService.logout();
+          } else {
+            setAuthorized(true);
           }
-
-          if (!authorized) setAuthorized(true); // Set hanya sekali saat valid
         } catch (err) {
-          console.error('Invalid token format:', err);
-          AuthService.logout(); // Optional fallback
+          console.error('Invalid token :', err);
+          AuthService.logout();
         }
-      }, 5000); // Cek setiap 5 detik
-
+      };
+    
+      checkToken();
+    
+      const interval = setInterval(checkToken, 5000);
+    
       return () => clearInterval(interval);
-    }, [authorized, router]);
+    }, [router]);
+    
 
-    if (!authorized) return <p>Loading...</p>
+    if (!authorized) return <p>Ambatukammm...</p>
 
     return (
         <div className={`${rubik.className} font-sans h-screen flex flex-col bg-sky-50 dark:bg-gray-900 overflow-hidden`}>
