@@ -41,7 +41,7 @@ export default function UserProfile() {
     fetchUser()
   }, [])
 
-  if (loading) return <img src="/profile.png"/>
+  if (loading) return <Image src="/profile.png" alt="Profil" height={50} width={50} className="p-0.5 bg-sky-50 dark:bg-sky-50 rounded-full w-10 h-10 object-cover"/>
 
   return (
     <Image src={ userPicture ? userPicture : "/profile.png" } alt="Profil" height={50} width={50} className="p-0.5 bg-sky-50 dark:bg-sky-50 rounded-full w-10 h-10 object-cover"></Image>
