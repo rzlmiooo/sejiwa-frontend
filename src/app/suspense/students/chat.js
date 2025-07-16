@@ -217,14 +217,14 @@ export default function Chat() {
                             <div className="w-full md:w-100 px-4 py-2 rounded bg-gray-600 text-white font-semibold cursor-not-allowed text-center">
                                 Anda Belum Booking
                             </div>
-                            <Link href="/home/chat/find-conselor" className="flex justify-center items-center gap-1 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500">Booking Konselor <ArrowUpRightIcon className="size-3" /></Link>
+                            <Link href="/home/chat/find-conselor" className="flex justify-center items-center gap-1 px-4 py-2 rounded-xl text-sky-50 bg-sky-600 hover:bg-sky-500">Booking Konselor <ArrowUpRightIcon className="size-3" /></Link>
                         </div>
 
                     )}
 
                 </div>
                 <div className="w-full md:w-100 mt-10 text-gray-900 dark:text-sky-50">
-                    <span className="text-xl font-bold text-lime-300 pr-2">Perhatian!</span>
+                    <span className="text-xl font-bold text-red-500 pr-2">Perhatian!</span>
                     Kalau Anda sebelumnya sudah melakukan Booking, silahkan masukkan Room ID yang didapat setelah booking.
                 </div>
                 <div className="flex my-2 gap-2 text-sm text-gray-900 dark:text-sky-50">
