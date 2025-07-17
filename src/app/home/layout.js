@@ -73,7 +73,7 @@ export default function Homepage({ children }){
     }, [router]);
     
 
-    if (!authorized) return <p>Ambatukammm...</p>
+    if (!authorized) return <p>Loading...</p>
 
     return (
         <div className={`${rubik.className} font-sans h-screen flex flex-col bg-sky-50 dark:bg-gray-900 overflow-hidden`}>
