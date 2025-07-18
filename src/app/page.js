@@ -119,8 +119,7 @@ export default function LandingPage() {
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 z-0 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         >
-          <div
-            style={{
+          <div style={{
               clipPath:
                 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
             }}
@@ -152,8 +151,7 @@ export default function LandingPage() {
           aria-hidden="true"
           className="absolute inset-x-0 top-[calc(100%-13rem)] z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
         >
-          <div
-            style={{
+          <div style={{
               clipPath:
                 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
             }}
@@ -166,6 +164,7 @@ export default function LandingPage() {
       <div className="relative md:-top-10 z-0">
         <div className="absolute -z-9999 -top-10 md:-top-10 -left-60 lg:-left-50 m-0 w-80 md:w-100 h-80 md:h-100 rounded-full bg-sky-500"></div>
         
+        {/* tujuan layanan */}
         <div className="mb-10 sm:mb-20 flex items-center justify-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl">
           Tujuan Layanan
           <div className="absolute top-7 left-18 sm:left-105 -z-10 w-10 sm:w-20 h-3 sm:h-5 rounded-full bg-sky-500"/>
@@ -204,7 +203,7 @@ export default function LandingPage() {
         <Image src="/favicon.ico" alt='mobile-button' height={100} width={100} />
       </button>
       
-      {/* fitur */}
+      {/* fitur Utama*/}
       <div className="m-10 flex flex-col justify-items-center">
          <div className="mt-20 mb-10 sm:mb-20 flex items-center justify-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl">
             Fitur Utama

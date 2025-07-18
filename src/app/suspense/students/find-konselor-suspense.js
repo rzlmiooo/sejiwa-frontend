@@ -34,10 +34,8 @@ export default function FindConselor() {
         });
         const allUsers = usersRes.data || [];
 
-        // Filter hanya konselor yang bisa difetch
         const counselorUsers = allUsers.filter(user => user.role === 'konselor');
 
-        // Fetch semua jadwal
         const scheduleRes = await axios.get('https://sejiwa.onrender.com/api/schedules', {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -47,7 +45,6 @@ export default function FindConselor() {
 
         const allSchedules = scheduleRes.data || [];
 
-        // Melampirkan Konselor yang cocok dengan Jadwal
         const combined = counselorUsers.map(counselor => {
           const counselorSchedules = allSchedules
           .filter(

@@ -249,7 +249,7 @@ export default function ProfilePage() {
           <div className="space-y-4">
             {successMessage && <p className="text-green-500">{successMessage}</p>}
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-
+            
             <div>
               <label htmlFor="username" className="block text-sm font-semibold mb-1">
                 Username

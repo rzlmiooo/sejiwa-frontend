@@ -39,7 +39,6 @@ export default function BookingHome() {
   
     const fetchData = async () => {
       try {
-        // 1. Ambil semua user dan bookings
         const [usersRes, bookingsRes] = await Promise.all([
           axios.get('https://sejiwa.onrender.com/api/users', {
             headers: {
@@ -58,17 +57,14 @@ export default function BookingHome() {
         const users = usersRes.data || [];
         const allBookings = bookingsRes.data || [];
   
-        // 2. Ambil userId dari token / localStorage / context
         if (!userId) return;
   
-        // 3. Filter hanya booking yang pending dan milik si konselor ini
         const pendingBookings = allBookings.filter(
           (b) =>
             b.status === "pending" &&
             b.counselor_id === userId
         );
   
-        // 4. Gabungkan data pelajar ke masing-masing booking
         const combinedData = pendingBookings.map((booking) => {
           const user = users.find((u) => u.id === booking.student_id);
           return {
@@ -84,10 +80,10 @@ export default function BookingHome() {
       }
     };
   
-    fetchData(); // jalankan pertama kali
-    const interval = setInterval(fetchData, 10000); // auto refresh tiap 10 detik
+    fetchData();
+    const interval = setInterval(fetchData, 10000);
   
-    return () => clearInterval(interval); // bersihkan interval saat unmount
+    return () => clearInterval(interval);
   }, [token]);
   
 
@@ -105,7 +101,6 @@ export default function BookingHome() {
     };
   
     try {
-      // 1. Update status booking
       const res = await axios.put(`https://sejiwa.onrender.com/api/bookings/${bookingId}`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -114,7 +109,6 @@ export default function BookingHome() {
       });
   
       if (status === 'confirm' && (res.status === 200 || res.status === 201)) {
-        // 2. Fetch latest room
         const roomRes = await axios.get("https://sejiwa.onrender.com/api/chats/rooms", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -122,8 +116,6 @@ export default function BookingHome() {
         });
   
         const rooms = roomRes.data || [];
-        // const sortedRooms = rooms.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-        // const lastRoom = sortedRooms[0];
         const roomUser = rooms
           .filter((room) => room.counselor_id === userId)
           .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // ⬅️ ASCENDING

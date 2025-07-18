@@ -13,7 +13,7 @@ export const AuthService = {
         }
       );
 
-      const jwtToken = response.data.token;
+      const jwtToken = String(response.data.token);
       const refreshToken = response.data.refresh_token || response.data.refresh || response.data.refreshToken;
 
       localStorage.setItem('token', jwtToken);

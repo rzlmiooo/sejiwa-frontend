@@ -18,9 +18,8 @@ export default function CreateBooking() {
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-    const redirectToSuccessBooking = (studentId, counselorId) => {
+    const redirectToChatRoom = (studentId, counselorId) => {
         router.push(`/home/chat/chat-pelajar/?student_id=${studentId}&counselor_id=${counselorId}`);
-        // router.push("/home/chat/booking/success-booking")
     };
 
     const [formData, setFormData] = useState({
@@ -61,7 +60,7 @@ export default function CreateBooking() {
                     successMessage: "Booking sukses. Redirecting ke halaman Chat...",
                     errorMessage: null,
                 }));
-                redirectToSuccessBooking(studentId, counselorId);
+                redirectToChatRoom(studentId, counselorId);
             } else {
                 setState((prev) => ({
                     ...prev,
@@ -69,7 +68,7 @@ export default function CreateBooking() {
                 }));
             }       ;
             
-            return redirectToSuccessBooking(studentId, counselorId);
+            return redirectToChatRoom(studentId, counselorId);
         } catch (error) {
             console.error("Booking request failed:", error);
             setState((prev) => ({

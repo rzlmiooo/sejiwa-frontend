@@ -44,17 +44,14 @@ export default function NotificationBell() {
         const users = usersRes.data || [];
         const allBookings = bookingsRes.data || [];
   
-        // 2. Ambil userId dari token / localStorage / context
         if (!userId) return;
   
-        // 3. Filter hanya booking yang pending dan milik si konselor ini
         const pendingBookings = allBookings.filter(
           (b) =>
             b.status === "pending" &&
             b.counselor_id === userId
         );
   
-        // 4. Gabungkan data pelajar ke masing-masing booking
         const combinedData = pendingBookings.map((booking) => {
           const user = users.find((u) => u.id === booking.student_id);
           return {
@@ -77,7 +74,7 @@ export default function NotificationBell() {
   if (role === null || token === null) return null;
   if (role !== 'konselor') return null;
 
-const handleMouseEnter = () => {
+  const handleMouseEnter = () => {
     clearTimeout(timeoutRef.current);
     setOpen(true);
     };

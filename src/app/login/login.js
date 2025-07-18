@@ -40,10 +40,9 @@ export default function Login() {
     setError("");
 
     try {
-      const token = await AuthService.login(email, password);
-      // const token = result.token;
-      // console.log("Login Successful:", token);
+      await AuthService.login(email, password);
 
+      const token = localStorage.getItem("token")
       const decoded = jwtDecode(token);
       const role = decoded.role;
       const studentId = decoded?.id;
@@ -51,9 +50,6 @@ export default function Login() {
       if (!username) {
         username = generateUsernameFromEmail(email);
       }
-
-      // console.log("Hello,", username);
-      // console.log("Decoded JWT:", decoded);
 
       if (!role) throw new Error("Role not found in token");
 
