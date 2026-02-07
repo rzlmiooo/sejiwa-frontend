@@ -17,7 +17,7 @@ const rubik = localFont({
 
 export default function RegistrationForm() {
   const router = useRouter();
-  
+
   const [step, setStep] = useState(1);
 
   const [state, setState] = useState({
