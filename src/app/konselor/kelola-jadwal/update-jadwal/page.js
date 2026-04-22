@@ -41,7 +41,7 @@ export default function UpdateJadwal() {
         };
 
         try {
-            const res = await axios.put('https://sejiwa.onrender.com/api/schedules', payload, {
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/schedules`, payload, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',

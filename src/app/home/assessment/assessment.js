@@ -19,7 +19,7 @@ export default function Ass() {
 
         const fetchQuestions = async () => {
             try {
-                const res = await axios.get('https://sejiwa.onrender.com/api/assessment/questions', {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/assessment/questions`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export default function Ass() {
         try {
             console.log('Submitted Payload:', submitted);
 
-            await axios.post('https://sejiwa.onrender.com/api/assessment/submit', submitted);
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/assessment/submit`, submitted);
 
             const query = encodeURIComponent(JSON.stringify(submitted.answers));
             router.push(`/home/recommendation?answers=${query}`);

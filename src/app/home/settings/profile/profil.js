@@ -40,7 +40,7 @@ export default function ProfilePage() {
       }
 
       try {
-        const res = await axios.get('https://sejiwa.onrender.com/api/users', {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ export default function ProfilePage() {
       const cloudinaryFormData = new FormData();
       cloudinaryFormData.append('image', file); 
 
-      const response = await axios.post('https://sejiwa.onrender.com/api/upload', cloudinaryFormData, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/upload`, cloudinaryFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -165,7 +165,7 @@ export default function ProfilePage() {
     };
 
     try {
-      await axios.patch(`https://sejiwa.onrender.com/api/users/${userId}`, payload, {
+      await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -194,7 +194,7 @@ export default function ProfilePage() {
     }
 
     try {
-      await axios.delete(`https://sejiwa.onrender.com/api/users/${userId}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

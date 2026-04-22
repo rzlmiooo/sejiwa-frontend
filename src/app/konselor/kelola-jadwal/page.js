@@ -27,7 +27,7 @@ export default function KelolaJadwal() {
     const fetchUserSchedules = async () => {
         try {
             setLoading(true);
-            const res = await axios.get('https://sejiwa.onrender.com/api/schedules', {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/schedules`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export default function KelolaJadwal() {
         };
 
         try {
-            const res = await axios.post('https://sejiwa.onrender.com/api/schedules', payload, {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/schedules`, payload, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',

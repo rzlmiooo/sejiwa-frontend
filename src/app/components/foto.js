@@ -19,7 +19,7 @@ export default function UserProfile() {
       }
 
       try {
-        const res = await axios.get('https://sejiwa.onrender.com/api/users', {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',

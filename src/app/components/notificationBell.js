@@ -27,13 +27,13 @@ export default function NotificationBell() {
     const fetchNewBookings = async () => {
       try {
         const [usersRes, bookingsRes] = await Promise.all([
-          axios.get('https://sejiwa.onrender.com/api/users', {
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
           }),
-          axios.get('https://sejiwa.onrender.com/api/bookings', {
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings`, {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
