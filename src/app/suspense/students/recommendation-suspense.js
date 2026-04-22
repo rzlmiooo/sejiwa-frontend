@@ -59,9 +59,9 @@ export default function Recommendation() {
 
         console.log("Payload untuk Assessment (dikirim ke backend):", payloadForAssessment);
 
-        await axios.post('https://sejiwa.onrender.com/api/assessment/answer', payloadForAssessment);
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/assessment/answer`, payloadForAssessment);
 
-        const res = await axios.post('https://sejiwa.onrender.com/api/assessment/submit', {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/assessment/submit`, {
           answers: cleanedAnswers,
         });
 

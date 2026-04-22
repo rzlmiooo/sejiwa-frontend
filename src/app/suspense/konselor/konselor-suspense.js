@@ -3,8 +3,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Chart from '@/app/components/chart';
-import UserGreeting from '@/app/components/greetings';
+import Chart from '../../components/chart';
+import UserGreeting from '../../components/greetings';
 
 export default function Dashboard() {
     const router = useRouter();
@@ -31,13 +31,13 @@ export default function Dashboard() {
         const fetchData = async () => {
             try {
                 const [usersRes, schedulesRes, assessmentsRes, chartsRes] = await Promise.all([
-                    axios.get('https://sejiwa.onrender.com/api/analytics/totalUsers', {
+                    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/analytics/totalUsers`, {
                         headers: { Authorization: `Bearer ${token}` }
                     }),
-                    axios.get('https://sejiwa.onrender.com/api/analytics/totalSchedules', {
+                    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/analytics/totalSchedules`, {
                         headers: { Authorization: `Bearer ${token}` }
                     }),
-                    axios.get('https://sejiwa.onrender.com/api/analytics/totalAssessments', {
+                    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/analytics/totalAssessments`, {
                         headers: { Authorization: `Bearer ${token}` }
                     })
                 ]);

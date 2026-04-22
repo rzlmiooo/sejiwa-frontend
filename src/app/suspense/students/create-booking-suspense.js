@@ -47,7 +47,7 @@ export default function CreateBooking() {
         }
 
         try {
-            const bookingsRes = await axios.post('https://sejiwa.onrender.com/api/bookings', payload, {
+            const bookingsRes = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings`, payload, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',

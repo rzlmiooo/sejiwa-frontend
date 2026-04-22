@@ -26,7 +26,7 @@ export default function FindConselor() {
 
     const fetchData = async () => {
       try {
-        const usersRes = await axios.get('https://sejiwa.onrender.com/api/users', {
+        const usersRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export default function FindConselor() {
 
         const counselorUsers = allUsers.filter(user => user.role === 'konselor');
 
-        const scheduleRes = await axios.get('https://sejiwa.onrender.com/api/schedules', {
+        const scheduleRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/schedules`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',

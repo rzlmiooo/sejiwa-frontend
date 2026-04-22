@@ -40,13 +40,13 @@ export default function BookingHome() {
     const fetchData = async () => {
       try {
         const [usersRes, bookingsRes] = await Promise.all([
-          axios.get('https://sejiwa.onrender.com/api/users', {
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
           }),
-          axios.get('https://sejiwa.onrender.com/api/bookings', {
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings`, {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ export default function BookingHome() {
     };
   
     try {
-      const res = await axios.put(`https://sejiwa.onrender.com/api/bookings/${bookingId}`, payload, {
+      const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings/${bookingId}`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export default function BookingHome() {
       });
   
       if (status === 'confirm' && (res.status === 200 || res.status === 201)) {
-        const roomRes = await axios.get("https://sejiwa.onrender.com/api/chats/rooms", {
+        const roomRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/rooms`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

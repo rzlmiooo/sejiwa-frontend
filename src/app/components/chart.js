@@ -12,7 +12,7 @@ export default function ChartComponent() {
       try {
         const token = localStorage.getItem('token');
         const res = await axios.get(
-          'https://sejiwa.onrender.com/api/analytics/scheduleCharts',
+          `${process.env.NEXT_PUBLIC_API_URL}/api/analytics/scheduleCharts`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

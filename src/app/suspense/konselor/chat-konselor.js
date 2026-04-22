@@ -49,7 +49,7 @@ export default function ChatKonselor() {
     useEffect(() => {
         if (!roomId || socketRef.current) return;
 
-        socketRef.current = io("https://sejiwa.onrender.com", {
+        socketRef.current = io(`${process.env.NEXT_PUBLIC_API_URL}`, {
             path: "/socket.io",
             autoConnect: true,
             transports: ["websocket"],
@@ -111,7 +111,7 @@ export default function ChatKonselor() {
 
         const fetchRoomUser = async () => {
             try {
-                const roomsRes = await axios.get('https://sejiwa.onrender.com/api/chats/rooms', {
+                const roomsRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/rooms`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',

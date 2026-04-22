@@ -50,7 +50,7 @@ export default function HasilAssessment() {
             setError(null); 
 
             try {
-                const roomsRes = await axios.get('https://sejiwa.onrender.com/api/chats/rooms', { 
+                const roomsRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/rooms`, { 
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export default function HasilAssessment() {
                 );
                 setRoomCodes(filteredRooms);
 
-                const assessmentRes = await axios.get('https://sejiwa.onrender.com/api/assessment/answer', { 
+                const assessmentRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/assessment/answer`, { 
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',

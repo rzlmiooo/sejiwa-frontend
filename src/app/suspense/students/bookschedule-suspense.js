@@ -20,7 +20,7 @@ export default function BookingSchedule() {
 
     const fetchData = async () => {
       try {
-        const bookingsRes = await axios.get('https://sejiwa.onrender.com/api/bookings', {
+        const bookingsRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',

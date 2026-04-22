@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "https://sejiwa.onrender.com";
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}`;
 
 export const AuthService = {
   login: async (email, password) => {

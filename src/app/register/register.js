@@ -64,7 +64,7 @@ export default function RegistrationForm() {
       formData.append('image', file);
 
       const response = await axios.post(
-        'https://sejiwa.onrender.com/api/upload',
+        `${process.env.NEXT_PUBLIC_API_URL}/api/upload`,
         formData,
         {
           headers: {
@@ -102,7 +102,7 @@ export default function RegistrationForm() {
         profile_picture: state.profile_picture
       };
 
-      axios.post("https://sejiwa.onrender.com/api/signup", payload)
+      axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/signup`, payload)
         .then((response) => {
           if (response.status === 200 || response.status === 201) {
             setState((prevState) => ({
